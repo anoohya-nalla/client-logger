@@ -7,7 +7,7 @@ export default function LogsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [darkMode, setDarkMode] = useState(false); // 🌙 NEW State
+  const [darkMode, setDarkMode] = useState(false);
 
   const logsPerPage = 10;
 
@@ -19,7 +19,6 @@ export default function LogsPage() {
     }
 
     fetchLogs();
-
     const interval = setInterval(() => {
       fetchLogs();
     }, 5000);
@@ -78,10 +77,10 @@ export default function LogsPage() {
     return matchesFilter && matchesSearch && matchesDate;
   });
 
-  const indexOfLastLog = currentPage * logsPerPage;
-  const indexOfFirstLog = indexOfLastLog - logsPerPage;
+  const indexOfLastLog = currentPage * 10;
+  const indexOfFirstLog = indexOfLastLog - 10;
   const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
-  const totalPages = Math.max(Math.ceil(filteredLogs.length / logsPerPage), 1);
+  const totalPages = Math.max(Math.ceil(filteredLogs.length / 10), 1);
 
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -100,7 +99,7 @@ export default function LogsPage() {
 
   const downloadCSV = () => {
     const headers = ["Timestamp", "Level", "URL", "Message"];
-    const rows = logs.map((log) => [
+    const rows = filteredLogs.map((log) => [
       log.timestamp,
       log.level,
       log.url,
@@ -114,95 +113,114 @@ export default function LogsPage() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "logs.csv");
+    link.setAttribute("download", "filtered_logs.csv"); // Notice the file name change
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  // Dynamic styles based on dark mode
   const pageStyles = {
     backgroundColor: darkMode ? "#121212" : "white",
     color: darkMode ? "#e0e0e0" : "black",
     minHeight: "100vh",
-    padding: "2rem",
     transition: "all 0.3s ease",
+  };
+
+  const topBarStyle = {
+    position: "sticky",
+    top: 0,
+    backgroundColor: darkMode ? "#121212" : "white",
+    zIndex: 999,
+    paddingBottom: "1rem",
+    marginBottom: "1rem",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    padding: "2rem",
   };
 
   return (
     <div style={pageStyles}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h1>Client Logs</h1>
-        <button
-          onClick={() => setDarkMode(!darkMode)}
+      <div style={topBarStyle}>
+        <div
           style={{
-            padding: "8px 16px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            backgroundColor: darkMode ? "#f5f5f5" : "#333",
-            color: darkMode ? "#333" : "#f5f5f5",
-            cursor: "pointer",
-            fontWeight: "bold",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
-      </div>
+          <h1>Client Logs</h1>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+              backgroundColor: darkMode ? "#f5f5f5" : "#333",
+              color: darkMode ? "#333" : "#f5f5f5",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+          </button>
+        </div>
 
-      {/* Search and Date Range */}
-      <div style={{ marginBottom: "1rem" }}>
-        <input
-          type="text"
-          placeholder="Search by message..."
-          value={searchTerm}
-          onChange={(e) => {
-            setSearchTerm(e.target.value);
-            setCurrentPage(1);
-          }}
+        {/* Search and Date Range */}
+        <div
           style={{
-            padding: "8px",
-            width: "300px",
-            marginRight: "20px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
+            marginTop: "1rem",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
           }}
-        />
-        {/* 🗓️ Date Filters */}
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => {
-            setStartDate(e.target.value);
-            setCurrentPage(1);
-          }}
-          style={{
-            marginRight: "10px",
-            padding: "8px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-          }}
-        />
-        to
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => {
-            setEndDate(e.target.value);
-            setCurrentPage(1);
-          }}
-          style={{
-            marginLeft: "10px",
-            padding: "8px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-          }}
-        />
+        >
+          <input
+            type="text"
+            placeholder="Search by message..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            style={{
+              padding: "8px",
+              width: "300px",
+              marginRight: "20px",
+              border: "1px solid #ccc",
+              borderRadius: "5px",
+            }}
+          />
+          {/* 🗓️ Date Filters */}
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => {
+              setStartDate(e.target.value);
+              setCurrentPage(1);
+            }}
+            style={{
+              marginRight: "10px",
+              padding: "8px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+            }}
+          />
+          to
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => {
+              setEndDate(e.target.value);
+              setCurrentPage(1);
+            }}
+            style={{
+              marginLeft: "10px",
+              padding: "8px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+            }}
+          />
+        </div>
+
         {/* Filter Buttons */}
         <div style={{ marginTop: "10px" }}>
           {[
@@ -246,13 +264,20 @@ export default function LogsPage() {
               fontWeight: "bold",
             }}
           >
-            📥 Download CSV
+            📥 Download Filtered CSV
           </button>
         </div>
+
+        {/* Total logs found */}
+        <p style={{ marginTop: "10px", fontWeight: "bold" }}>
+          Showing {filteredLogs.length} log(s)
+        </p>
       </div>
 
       {/* Logs Table */}
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+      <table
+        style={{ width: "100%", borderCollapse: "collapse", padding: "2rem" }}
+      >
         <thead>
           <tr>
             <th style={{ border: "1px solid #ddd", padding: "8px" }}>
@@ -292,6 +317,7 @@ export default function LogsPage() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          padding: "2rem",
         }}
       >
         <button
