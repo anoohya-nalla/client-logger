@@ -1,0 +1,72 @@
+[2025-06-07T05:36:24.039Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T05:36:23.992Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 363ms
+[2025-06-07T05:36:25.194Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:36:25.396Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 203ms
+[2025-06-07T05:36:25.422Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T05:36:56.478Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:36:57.140Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 662ms
+[2025-06-07T05:38:12.034Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:38:12.744Z] [LOG] [http://localhost:3000/] Hello from console log!
+[2025-06-07T05:38:12.755Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:38:12.773Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
+[2025-06-07T05:38:12.775Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:38:12.816Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 782ms
+[2025-06-07T05:38:43.925Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:38:44.317Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 392ms
+[2025-06-07T05:40:58.268Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:40:58.585Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 316ms
+[2025-06-07T05:41:04.606Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:41:04.918Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 312ms
+[2025-06-07T05:41:50.315Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:41:50.741Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 426ms
+[2025-06-07T05:42:46.620Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:42:46.930Z] [LOG] [http://localhost:3000/] Hello from console log!
+[2025-06-07T05:42:46.930Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:42:46.937Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
+[2025-06-07T05:42:46.937Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:42:46.957Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 337ms
+[2025-06-07T05:42:46.960Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T05:42:47.039Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:42:47.038Z] [LOG] [http://localhost:3000/] Hello from console log!
+[2025-06-07T05:42:47.043Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
+[2025-06-07T05:42:47.043Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:43:07.183Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T05:43:07.696Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:43:07.707Z] [ERROR] [http://localhost:3000/] This is an error!
+[2025-06-07T05:43:07.706Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m This is a normal log!
+[2025-06-07T05:43:07.725Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 542ms
+[2025-06-07T05:43:07.695Z] [LOG] [http://localhost:3000/] This is a normal log!
+[2025-06-07T05:46:44.944Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:46:45.226Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 281ms
+[2025-06-07T05:48:57.426Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:48:58.011Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
+[2025-06-07T05:48:58.383Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 956ms
+[2025-06-07T05:49:01.254Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:49:01.494Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
+[2025-06-07T05:49:01.765Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 511ms
+[2025-06-07T05:49:45.854Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T05:49:46.212Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
+[2025-06-07T05:49:46.362Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 508ms
+[2025-06-07T06:00:11.839Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749276011839ms
+[2025-06-07T06:00:11.812Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:00:21.522Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T06:00:21.967Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 445ms
+[2025-06-07T06:02:05.607Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T06:02:05.971Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
+[2025-06-07T06:02:06.182Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 575ms
+[2025-06-07T06:03:21.595Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:07:10.861Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:07:26.599Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:10:03.042Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:10:08.827Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T06:10:20.408Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
+[2025-06-07T09:58:09.938Z] [LOG] [http://localhost:3000/] Button Test: normal log
+[2025-06-07T09:58:09.942Z] [ERROR] [http://localhost:3000/] Button Test: error
+[2025-06-07T09:58:09.946Z] [INFO] [http://localhost:3000/] Button Test: info
+[2025-06-07T09:58:09.948Z] [WARN] [http://localhost:3000/] Button Test: warning
+[2025-06-07T09:58:09.955Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
+[2025-06-07T09:59:36.250Z] [LOG] [http://localhost:3000/] Button Test: normal log
+[2025-06-07T09:59:36.253Z] [ERROR] [http://localhost:3000/] Button Test: error
+[2025-06-07T09:59:36.257Z] [INFO] [http://localhost:3000/] Button Test: info
+[2025-06-07T09:59:36.258Z] [WARN] [http://localhost:3000/] Button Test: warning
+[2025-06-07T09:59:36.262Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
