@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function LogsPage() {
   const [logs, setLogs] = useState([]);
-  const [filter, setFilter] = useState("ALL"); // <-- New State
+  const [filter, setFilter] = useState("ALL");
 
   useEffect(() => {
     async function fetchLogs() {
@@ -22,7 +22,7 @@ export default function LogsPage() {
           color: "#b30000",
           fontWeight: "bold",
         };
-      case "WARN": // <-- use WARN here
+      case "WARN":
         return {
           backgroundColor: "#fff9e5",
           color: "#b38600",
@@ -40,9 +40,31 @@ export default function LogsPage() {
     }
   };
 
-  // New filtered logs
   const filteredLogs =
     filter === "ALL" ? logs : logs.filter((log) => log.level === filter);
+
+  // ✅ Step 2: Create download CSV function
+  const downloadCSV = () => {
+    const headers = ["Timestamp", "Level", "URL", "Message"];
+    const rows = logs.map((log) => [
+      log.timestamp,
+      log.level,
+      log.url,
+      `"${log.message.replace(/"/g, '""')}"`, // Escape double quotes
+    ]);
+
+    let csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "logs.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div style={{ padding: "2rem" }}>
@@ -68,6 +90,23 @@ export default function LogsPage() {
             {level}
           </button>
         ))}
+
+        {/* Download CSV Button */}
+        <button
+          onClick={downloadCSV}
+          style={{
+            marginLeft: "20px",
+            padding: "8px 16px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            backgroundColor: "#28a745",
+            color: "white",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          📥 Download CSV
+        </button>
       </div>
 
       {/* Logs Table */}
