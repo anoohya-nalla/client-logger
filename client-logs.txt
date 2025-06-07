@@ -70,3 +70,10 @@
 [2025-06-07T09:59:36.257Z] [INFO] [http://localhost:3000/] Button Test: info
 [2025-06-07T09:59:36.258Z] [WARN] [http://localhost:3000/] Button Test: warning
 [2025-06-07T09:59:36.262Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
+[2025-06-07T10:24:12.762Z] [LOG] [http://localhost:3000/logs] [HMR] connected
+[2025-06-07T10:24:12.878Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T10:24:14.870Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T10:24:15.578Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T10:30:44.638Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T10:30:45.295Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 657ms
+[2025-06-07T10:30:50.057Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 1749292250057ms

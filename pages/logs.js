@@ -4,7 +4,9 @@ export default function LogsPage() {
   const [logs, setLogs] = useState([]);
   const [filter, setFilter] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState(""); // 🆕 New State
+  const [searchTerm, setSearchTerm] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const logsPerPage = 10;
 
   useEffect(() => {
@@ -22,6 +24,12 @@ export default function LogsPage() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const addOneDay = (date) => {
+    const result = new Date(date);
+    result.setDate(result.getDate() + 1);
+    return result;
+  };
 
   const getRowStyle = (level) => {
     switch (level) {
@@ -54,16 +62,18 @@ export default function LogsPage() {
     setCurrentPage(1);
   };
 
-  // 🧠 Combine filter and search
+  // Combined filter: Level + Search + Date Range
   const filteredLogs = logs.filter((log) => {
     const matchesFilter = filter === "ALL" || log.level === filter;
     const matchesSearch = log.message
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    return matchesFilter && matchesSearch;
+    const matchesDate =
+      (!startDate || new Date(log.timestamp) >= new Date(startDate)) &&
+      (!endDate || new Date(log.timestamp) < addOneDay(new Date(endDate)));
+    return matchesFilter && matchesSearch && matchesDate;
   });
 
-  // Pagination
   const indexOfLastLog = currentPage * logsPerPage;
   const indexOfFirstLog = indexOfLastLog - logsPerPage;
   const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
@@ -77,7 +87,6 @@ export default function LogsPage() {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  // Counts
   const logCounts = logs.reduce((acc, log) => {
     acc[log.level] = (acc[log.level] || 0) + 1;
     return acc;
@@ -111,7 +120,7 @@ export default function LogsPage() {
     <div style={{ padding: "2rem" }}>
       <h1>Client Logs</h1>
 
-      {/* Search Input */}
+      {/* Search and Date Range */}
       <div style={{ marginBottom: "1rem" }}>
         <input
           type="text"
@@ -129,48 +138,82 @@ export default function LogsPage() {
             borderRadius: "5px",
           }}
         />
+        {/* 🗓️ Date Filters */}
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => {
+            setStartDate(e.target.value);
+            setCurrentPage(1);
+          }}
+          style={{
+            marginRight: "10px",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
+        to
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => {
+            setEndDate(e.target.value);
+            setCurrentPage(1);
+          }}
+          style={{
+            marginLeft: "10px",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+          }}
+        />
         {/* Filter Buttons */}
-        {[
-          { type: "ALL", count: totalCount },
-          { type: "LOG", count: logCounts["LOG"] || 0 },
-          { type: "INFO", count: logCounts["INFO"] || 0 },
-          { type: "WARN", count: logCounts["WARN"] || 0 },
-          { type: "ERROR", count: logCounts["ERROR"] || 0 },
-        ].map(({ type, count }) => (
+        <div style={{ marginTop: "10px" }}>
+          {[
+            { type: "ALL", count: totalCount },
+            { type: "LOG", count: logCounts["LOG"] || 0 },
+            { type: "INFO", count: logCounts["INFO"] || 0 },
+            { type: "WARN", count: logCounts["WARN"] || 0 },
+            { type: "ERROR", count: logCounts["ERROR"] || 0 },
+          ].map(({ type, count }) => (
+            <button
+              key={type}
+              onClick={() => handleFilterChange(type)}
+              style={{
+                marginRight: "10px",
+                marginTop: "10px",
+                padding: "8px 16px",
+                borderRadius: "5px",
+                border:
+                  filter === type ? "2px solid #0070f3" : "1px solid #ccc",
+                backgroundColor: filter === type ? "#0070f3" : "#f5f5f5",
+                color: filter === type ? "white" : "black",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              {type} ({count})
+            </button>
+          ))}
+
+          {/* Download CSV Button */}
           <button
-            key={type}
-            onClick={() => handleFilterChange(type)}
+            onClick={downloadCSV}
             style={{
-              marginRight: "10px",
+              marginLeft: "20px",
               padding: "8px 16px",
               borderRadius: "5px",
-              border: filter === type ? "2px solid #0070f3" : "1px solid #ccc",
-              backgroundColor: filter === type ? "#0070f3" : "#f5f5f5",
-              color: filter === type ? "white" : "black",
+              border: "1px solid #ccc",
+              backgroundColor: "#28a745",
+              color: "white",
               cursor: "pointer",
               fontWeight: "bold",
             }}
           >
-            {type} ({count})
+            📥 Download CSV
           </button>
-        ))}
-
-        {/* Download CSV Button */}
-        <button
-          onClick={downloadCSV}
-          style={{
-            marginLeft: "20px",
-            padding: "8px 16px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            backgroundColor: "#28a745",
-            color: "white",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}
-        >
-          📥 Download CSV
-        </button>
+        </div>
       </div>
 
       {/* Logs Table */}
