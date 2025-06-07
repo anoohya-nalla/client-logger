@@ -104,3 +104,35 @@
 [2025-06-07T14:17:09.684Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 286ms
 [2025-06-07T14:17:33.716Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
 [2025-06-07T14:17:34.228Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 513ms
+[2025-06-07T16:46:15.984Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T16:46:16.471Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T16:46:16.622Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 151ms
+[2025-06-07T16:46:26.093Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-07T16:46:26.803Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 710ms
+[2025-06-07T16:54:53.994Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T16:54:54.362Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T16:54:54.508Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 514ms
+[2025-06-07T16:55:04.062Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749315304061ms
+[2025-06-07T17:05:25.876Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T17:05:26.496Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-07T17:05:26.500Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-07T17:05:26.526Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 650ms
+[2025-06-07T17:05:26.528Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 650ms
+[2025-06-07T17:05:26.538Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T17:05:26.552Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-07T17:08:16.049Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-07T17:08:16.233Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-07T17:08:16.333Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749316096333ms
+[2025-06-07T17:08:39.225Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-07T17:08:39.810Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 585ms
+[2025-06-07T17:08:41.807Z] [LOG] [http://localhost:3000/logs] [HMR] connected
+[2025-06-07T17:35:37.112Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-07T17:35:37.348Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-07T17:35:45.973Z] [LOG] [http://localhost:3000/logs] [HMR] connected
+[2025-06-07T17:37:22.669Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-07T17:37:40.184Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-07T17:38:31.515Z] [ERROR] [http://localhost:3000/] Button Test: error
+[2025-06-07T17:38:31.514Z] [LOG] [http://localhost:3000/] Button Test: normal log
+[2025-06-07T17:38:31.526Z] [WARN] [http://localhost:3000/] Button Test: warning
+[2025-06-07T17:38:31.523Z] [INFO] [http://localhost:3000/] Button Test: info
+[2025-06-07T17:38:31.532Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection

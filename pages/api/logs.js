@@ -9,6 +9,8 @@ export default async function handler(req, res) {
 
     const logEntry = `[${timestamp}] [${level.toUpperCase()}] [${url}] ${message}\n`;
 
+    console.log(`Server side [${level.toUpperCase()}] ${message} @ ${url}`);
+
     fs.appendFile(logFilePath, logEntry, (err) => {
       if (err) {
         console.error("Failed to write log:", err);

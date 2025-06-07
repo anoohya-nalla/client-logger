@@ -23,6 +23,14 @@ export default function Home() {
     Promise.reject("Button Test: unhandled promise rejection");
   };
 
+  useEffect(() => {
+    try {
+      throw new Error("This is a test error inside try-catch!");
+    } catch (error) {
+      console.error("Caught error:", error.message);
+    }
+  }, []);
+
   return (
     <>
       <Head>

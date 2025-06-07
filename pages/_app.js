@@ -2,10 +2,10 @@ import "@/styles/globals.css";
 import { useEffect } from "react";
 import { interceptConsole } from "../lib/logger";
 
-export default function App({ Component, pageProps }) {
-  useEffect(() => {
-    interceptConsole();
-  }, []);
+if (typeof window !== "undefined") {
+  interceptConsole(); //  Only run on client side
+}
 
+export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
