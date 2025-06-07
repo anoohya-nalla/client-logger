@@ -12,6 +12,13 @@ export default function LogsPage() {
     }
 
     fetchLogs();
+
+    // Auto-refresh every 5 seconds
+    const interval = setInterval(() => {
+      fetchLogs();
+    }, 5000);
+
+    return () => clearInterval(interval); // Clean up
   }, []);
 
   const getRowStyle = (level) => {
@@ -43,14 +50,22 @@ export default function LogsPage() {
   const filteredLogs =
     filter === "ALL" ? logs : logs.filter((log) => log.level === filter);
 
-  // ✅ Step 2: Create download CSV function
+  // 🧮 Count logs by level
+  const logCounts = logs.reduce((acc, log) => {
+    acc[log.level] = (acc[log.level] || 0) + 1;
+    return acc;
+  }, {});
+
+  const totalCount = logs.length;
+
+  // CSV Download function
   const downloadCSV = () => {
     const headers = ["Timestamp", "Level", "URL", "Message"];
     const rows = logs.map((log) => [
       log.timestamp,
       log.level,
       log.url,
-      `"${log.message.replace(/"/g, '""')}"`, // Escape double quotes
+      `"${log.message.replace(/"/g, '""')}"`,
     ]);
 
     let csvContent =
@@ -72,22 +87,28 @@ export default function LogsPage() {
 
       {/* Filter Buttons */}
       <div style={{ marginBottom: "1rem" }}>
-        {["ALL", "LOG", "INFO", "WARN", "ERROR"].map((level) => (
+        {[
+          { type: "ALL", count: totalCount },
+          { type: "LOG", count: logCounts["LOG"] || 0 },
+          { type: "INFO", count: logCounts["INFO"] || 0 },
+          { type: "WARN", count: logCounts["WARN"] || 0 },
+          { type: "ERROR", count: logCounts["ERROR"] || 0 },
+        ].map(({ type, count }) => (
           <button
-            key={level}
-            onClick={() => setFilter(level)}
+            key={type}
+            onClick={() => setFilter(type)}
             style={{
               marginRight: "10px",
               padding: "8px 16px",
               borderRadius: "5px",
-              border: filter === level ? "2px solid #0070f3" : "1px solid #ccc",
-              backgroundColor: filter === level ? "#0070f3" : "#f5f5f5",
-              color: filter === level ? "white" : "black",
+              border: filter === type ? "2px solid #0070f3" : "1px solid #ccc",
+              backgroundColor: filter === type ? "#0070f3" : "#f5f5f5",
+              color: filter === type ? "white" : "black",
               cursor: "pointer",
               fontWeight: "bold",
             }}
           >
-            {level}
+            {type} ({count})
           </button>
         ))}
 
