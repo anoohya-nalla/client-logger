@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 export default function LogsPage() {
   const [logs, setLogs] = useState([]);
   const [filter, setFilter] = useState("ALL");
-  const [currentPage, setCurrentPage] = useState(1); // 🆕
-  const logsPerPage = 10; // 🆕
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState(""); // 🆕 New State
+  const logsPerPage = 10;
 
   useEffect(() => {
     async function fetchLogs() {
@@ -48,14 +49,25 @@ export default function LogsPage() {
     }
   };
 
-  const filteredLogs =
-    filter === "ALL" ? logs : logs.filter((log) => log.level === filter);
+  const handleFilterChange = (level) => {
+    setFilter(level);
+    setCurrentPage(1);
+  };
 
-  // Pagination logic
+  // 🧠 Combine filter and search
+  const filteredLogs = logs.filter((log) => {
+    const matchesFilter = filter === "ALL" || log.level === filter;
+    const matchesSearch = log.message
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
+  // Pagination
   const indexOfLastLog = currentPage * logsPerPage;
   const indexOfFirstLog = indexOfLastLog - logsPerPage;
   const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
-  const totalPages = Math.ceil(filteredLogs.length / logsPerPage);
+  const totalPages = Math.max(Math.ceil(filteredLogs.length / logsPerPage), 1);
 
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -65,12 +77,7 @@ export default function LogsPage() {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  const handleFilterChange = (level) => {
-    setFilter(level);
-    setCurrentPage(1); // Reset to page 1 when filter changes
-  };
-
-  // 🧮 Count logs by level
+  // Counts
   const logCounts = logs.reduce((acc, log) => {
     acc[log.level] = (acc[log.level] || 0) + 1;
     return acc;
@@ -104,8 +111,25 @@ export default function LogsPage() {
     <div style={{ padding: "2rem" }}>
       <h1>Client Logs</h1>
 
-      {/* Filter Buttons */}
+      {/* Search Input */}
       <div style={{ marginBottom: "1rem" }}>
+        <input
+          type="text"
+          placeholder="Search by message..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
+          style={{
+            padding: "8px",
+            width: "300px",
+            marginRight: "20px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+          }}
+        />
+        {/* Filter Buttons */}
         {[
           { type: "ALL", count: totalCount },
           { type: "LOG", count: logCounts["LOG"] || 0 },
