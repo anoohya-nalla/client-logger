@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 export default function LogsPage() {
   const [logs, setLogs] = useState([]);
   const [filter, setFilter] = useState("ALL");
+  const [currentPage, setCurrentPage] = useState(1); // 🆕
+  const logsPerPage = 10; // 🆕
 
   useEffect(() => {
     async function fetchLogs() {
@@ -13,12 +15,11 @@ export default function LogsPage() {
 
     fetchLogs();
 
-    // Auto-refresh every 5 seconds
     const interval = setInterval(() => {
       fetchLogs();
     }, 5000);
 
-    return () => clearInterval(interval); // Clean up
+    return () => clearInterval(interval);
   }, []);
 
   const getRowStyle = (level) => {
@@ -50,6 +51,25 @@ export default function LogsPage() {
   const filteredLogs =
     filter === "ALL" ? logs : logs.filter((log) => log.level === filter);
 
+  // Pagination logic
+  const indexOfLastLog = currentPage * logsPerPage;
+  const indexOfFirstLog = indexOfLastLog - logsPerPage;
+  const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
+  const totalPages = Math.ceil(filteredLogs.length / logsPerPage);
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handleFilterChange = (level) => {
+    setFilter(level);
+    setCurrentPage(1); // Reset to page 1 when filter changes
+  };
+
   // 🧮 Count logs by level
   const logCounts = logs.reduce((acc, log) => {
     acc[log.level] = (acc[log.level] || 0) + 1;
@@ -58,7 +78,6 @@ export default function LogsPage() {
 
   const totalCount = logs.length;
 
-  // CSV Download function
   const downloadCSV = () => {
     const headers = ["Timestamp", "Level", "URL", "Message"];
     const rows = logs.map((log) => [
@@ -96,7 +115,7 @@ export default function LogsPage() {
         ].map(({ type, count }) => (
           <button
             key={type}
-            onClick={() => setFilter(type)}
+            onClick={() => handleFilterChange(type)}
             style={{
               marginRight: "10px",
               padding: "8px 16px",
@@ -145,7 +164,7 @@ export default function LogsPage() {
           </tr>
         </thead>
         <tbody>
-          {filteredLogs.map((log, index) => (
+          {currentLogs.map((log, index) => (
             <tr key={index} style={getRowStyle(log.level)}>
               <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                 {log.timestamp}
@@ -163,6 +182,49 @@ export default function LogsPage() {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <button
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+          style={{
+            padding: "8px 16px",
+            marginRight: "10px",
+            backgroundColor: currentPage === 1 ? "#ccc" : "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: currentPage === 1 ? "not-allowed" : "pointer",
+          }}
+        >
+          Previous
+        </button>
+        <span style={{ margin: "0 10px", fontWeight: "bold" }}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+          style={{
+            padding: "8px 16px",
+            backgroundColor: currentPage === totalPages ? "#ccc" : "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
