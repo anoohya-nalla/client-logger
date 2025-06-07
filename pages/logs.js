@@ -7,6 +7,8 @@ export default function LogsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [darkMode, setDarkMode] = useState(false); // 🌙 NEW State
+
   const logsPerPage = 10;
 
   useEffect(() => {
@@ -35,25 +37,28 @@ export default function LogsPage() {
     switch (level) {
       case "ERROR":
         return {
-          backgroundColor: "#ffe5e5",
-          color: "#b30000",
+          backgroundColor: darkMode ? "#440000" : "#ffe5e5",
+          color: darkMode ? "#ffcccc" : "#b30000",
           fontWeight: "bold",
         };
       case "WARN":
         return {
-          backgroundColor: "#fff9e5",
-          color: "#b38600",
+          backgroundColor: darkMode ? "#443300" : "#fff9e5",
+          color: darkMode ? "#ffe680" : "#b38600",
           fontWeight: "bold",
         };
       case "INFO":
         return {
-          backgroundColor: "#e5f0ff",
-          color: "#0059b3",
+          backgroundColor: darkMode ? "#001144" : "#e5f0ff",
+          color: darkMode ? "#80b3ff" : "#0059b3",
           fontWeight: "bold",
         };
       case "LOG":
       default:
-        return { backgroundColor: "#e5ffe5", color: "#006600" };
+        return {
+          backgroundColor: darkMode ? "#003300" : "#e5ffe5",
+          color: darkMode ? "#80ff80" : "#006600",
+        };
     }
   };
 
@@ -62,7 +67,6 @@ export default function LogsPage() {
     setCurrentPage(1);
   };
 
-  // Combined filter: Level + Search + Date Range
   const filteredLogs = logs.filter((log) => {
     const matchesFilter = filter === "ALL" || log.level === filter;
     const matchesSearch = log.message
@@ -116,9 +120,40 @@ export default function LogsPage() {
     document.body.removeChild(link);
   };
 
+  // Dynamic styles based on dark mode
+  const pageStyles = {
+    backgroundColor: darkMode ? "#121212" : "white",
+    color: darkMode ? "#e0e0e0" : "black",
+    minHeight: "100vh",
+    padding: "2rem",
+    transition: "all 0.3s ease",
+  };
+
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Client Logs</h1>
+    <div style={pageStyles}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1>Client Logs</h1>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{
+            padding: "8px 16px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            backgroundColor: darkMode ? "#f5f5f5" : "#333",
+            color: darkMode ? "#333" : "#f5f5f5",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
+      </div>
 
       {/* Search and Date Range */}
       <div style={{ marginBottom: "1rem" }}>
