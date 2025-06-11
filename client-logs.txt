@@ -136,3 +136,23 @@
 [2025-06-07T17:38:31.526Z] [WARN] [http://localhost:3000/] Button Test: warning
 [2025-06-07T17:38:31.523Z] [INFO] [http://localhost:3000/] Button Test: info
 [2025-06-07T17:38:31.532Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
+[2025-06-07T18:08:46.945Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-07T18:08:46.940Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
+[2025-06-11T13:24:59.027Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-11T13:24:59.025Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
+[2025-06-11T13:26:23.440Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
+[2025-06-11T13:26:23.442Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-11T13:26:42.514Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-11T13:26:43.097Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 583ms
+[2025-06-11T13:26:56.851Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-11T13:26:56.999Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 148ms
+[2025-06-11T13:27:02.743Z] [LOG] [http://localhost:3000/] [HMR] connected
+[2025-06-11T13:27:02.800Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
+[2025-06-11T13:27:06.236Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-11T13:27:06.589Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 353ms
+[2025-06-11T13:27:07.275Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-11T13:27:07.598Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-11T13:27:07.563Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 288ms
+[2025-06-11T13:27:08.680Z] [ERROR] [http://localhost:3000/crash] Uncaught Error: I crashed on purpose for testing! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
+[2025-06-11T13:27:08.681Z] [LOG] [http://localhost:3000/crash] [HMR] connected
+[2025-06-11T13:27:44.839Z] [LOG] [http://localhost:3000/logs] [HMR] connected
