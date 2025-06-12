@@ -6,9 +6,16 @@ export default async function handler(req, res) {
     const logFilePath = path.join(process.cwd(), "client-logs.txt");
 
     if (req.method === "POST") {
-      const { level, message, timestamp, url } = req.body;
+      const { level, message, timestamp, url, userId } = req.body;
 
-      const logEntry = `[${timestamp}] [${level.toUpperCase()}] [${url}] ${message}\n`;
+      if (!level || !message || !timestamp || !url) {
+        return res.status(400).json({ error: "Missing log data" });
+      }
+
+      const cleanMessage = message.replace(/\n/g, " ");
+      const logEntry = `[${timestamp}] [${level.toUpperCase()}] (${
+        userId || "anonymous"
+      }) [${url}] ${cleanMessage}\n`;
 
       console.log(`Server side [${level.toUpperCase()}] ${message} @ ${url}`);
 
@@ -30,16 +37,54 @@ export default async function handler(req, res) {
           .trim()
           .split("\n")
           .map((line) => {
-            const match = line.match(/\[(.*?)\] \[(.*?)\] \[(.*?)\] (.*)/);
+            const match = line.match(
+              /\[(.*?)\] \[(.*?)\] \((.*?)\) \[(.*?)\] (.*)/
+            );
             if (match) {
-              const [, timestamp, level, url, message] = match;
-              return { timestamp, level, url, message };
+              const [, timestamp, level, userId, url, message] = match;
+              return { timestamp, level, url, message, userId };
             }
+
             return null;
           })
           .filter(Boolean);
 
-        res.status(200).json({ logs });
+        // Count log levels
+        const stats = logs.reduce((acc, log) => {
+          acc[log.level] = (acc[log.level] || 0) + 1;
+          return acc;
+        }, {});
+
+        // Group by day (YYYY-MM-DD)
+        const dailyCounts = {};
+        logs.forEach((log) => {
+          const date = new Date(log.timestamp).toISOString().split("T")[0];
+          dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+        });
+
+        const todayStr = new Date().toISOString().split("T")[0];
+        let todayCount = 0;
+
+        const grouped = {};
+
+        logs.forEach((log) => {
+          const date = new Date(log.timestamp).toISOString().split("T")[0];
+          const source = log.url.includes("/api/") ? "server" : "client";
+
+          if (date === todayStr) todayCount++;
+
+          if (!grouped[date]) {
+            grouped[date] = { date, client: 0, server: 0 };
+          }
+
+          grouped[date][source]++;
+        });
+
+        const stackedCounts = Object.values(grouped);
+
+        res
+          .status(200)
+          .json({ logs, stats, dailyCounts, todayCount, stackedCounts });
       });
     } else {
       res.status(405).json({ message: "Method not allowed" });

@@ -284,6 +284,9 @@ export default function LogsPage() {
               Timestamp
             </th>
             <th style={{ border: "1px solid #ddd", padding: "8px" }}>Level</th>
+            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
+              User ID
+            </th>
             <th style={{ border: "1px solid #ddd", padding: "8px" }}>URL</th>
             <th style={{ border: "1px solid #ddd", padding: "8px" }}>
               Message
@@ -294,15 +297,23 @@ export default function LogsPage() {
           {currentLogs.map((log, index) => (
             <tr key={index} style={getRowStyle(log.level)}>
               <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {log.timestamp}
+                {new Date(log.timestamp).toLocaleString()}
               </td>
               <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                 {log.level}
               </td>
               <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {log.url}
+                {log.userId}
               </td>
               <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                {log.url}
+              </td>
+              <td
+                style={{
+                  border: "1px solid #ddd",
+                  padding: "8px",
+                }}
+              >
                 {log.message}
               </td>
             </tr>

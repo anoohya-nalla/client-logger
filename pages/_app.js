@@ -38,17 +38,21 @@ export default function App({ Component, pageProps }) {
       onError={(error, errorInfo) => {
         console.error("Caught by ErrorBoundary:", error, errorInfo);
 
-        // Send to server logs
-        fetch("/api/logs", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            level: "ERROR",
-            message: `ErrorBoundary Caught: ${error.toString()}`,
-            timestamp: new Date().toISOString(),
-            url: window.location.href,
-          }),
-        });
+        if (typeof window !== "undefined") {
+          const userId = localStorage.getItem("userId") || "anonymous";
+
+          fetch("/api/logs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              level: "ERROR",
+              message: `ErrorBoundary Caught: ${error.toString()}`,
+              timestamp: new Date().toISOString(),
+              url: window.location.href,
+              userId,
+            }),
+          });
+        }
       }}
     >
       <Component {...pageProps} />

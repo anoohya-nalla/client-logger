@@ -1,158 +1,481 @@
-[2025-06-07T05:36:24.039Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T05:36:23.992Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 363ms
-[2025-06-07T05:36:25.194Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:36:25.396Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 203ms
-[2025-06-07T05:36:25.422Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T05:36:56.478Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:36:57.140Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 662ms
-[2025-06-07T05:38:12.034Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:38:12.744Z] [LOG] [http://localhost:3000/] Hello from console log!
-[2025-06-07T05:38:12.755Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:38:12.773Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
-[2025-06-07T05:38:12.775Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:38:12.816Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 782ms
-[2025-06-07T05:38:43.925Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:38:44.317Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 392ms
-[2025-06-07T05:40:58.268Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:40:58.585Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 316ms
-[2025-06-07T05:41:04.606Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:41:04.918Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 312ms
-[2025-06-07T05:41:50.315Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:41:50.741Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 426ms
-[2025-06-07T05:42:46.620Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:42:46.930Z] [LOG] [http://localhost:3000/] Hello from console log!
-[2025-06-07T05:42:46.930Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:42:46.937Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
-[2025-06-07T05:42:46.937Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:42:46.957Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 337ms
-[2025-06-07T05:42:46.960Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T05:42:47.039Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:42:47.038Z] [LOG] [http://localhost:3000/] Hello from console log!
-[2025-06-07T05:42:47.043Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m Hello from console log!
-[2025-06-07T05:42:47.043Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:43:07.183Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T05:43:07.696Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:43:07.707Z] [ERROR] [http://localhost:3000/] This is an error!
-[2025-06-07T05:43:07.706Z] [LOG] [http://localhost:3000/] [2;38;2;124;124;124m%s[0m This is a normal log!
-[2025-06-07T05:43:07.725Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 542ms
-[2025-06-07T05:43:07.695Z] [LOG] [http://localhost:3000/] This is a normal log!
-[2025-06-07T05:46:44.944Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:46:45.226Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 281ms
-[2025-06-07T05:48:57.426Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:48:58.011Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
-[2025-06-07T05:48:58.383Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 956ms
-[2025-06-07T05:49:01.254Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:49:01.494Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
-[2025-06-07T05:49:01.765Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 511ms
-[2025-06-07T05:49:45.854Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T05:49:46.212Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
-[2025-06-07T05:49:46.362Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 508ms
-[2025-06-07T06:00:11.839Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749276011839ms
-[2025-06-07T06:00:11.812Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:00:21.522Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T06:00:21.967Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 445ms
-[2025-06-07T06:02:05.607Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T06:02:05.971Z] [LOG] [http://localhost:3000/logs] Refreshing page data due to server-side change
-[2025-06-07T06:02:06.182Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 575ms
-[2025-06-07T06:03:21.595Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:07:10.861Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:07:26.599Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:10:03.042Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:10:08.827Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T06:10:20.408Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Test: unhandled promise rejection
-[2025-06-07T09:58:09.938Z] [LOG] [http://localhost:3000/] Button Test: normal log
-[2025-06-07T09:58:09.942Z] [ERROR] [http://localhost:3000/] Button Test: error
-[2025-06-07T09:58:09.946Z] [INFO] [http://localhost:3000/] Button Test: info
-[2025-06-07T09:58:09.948Z] [WARN] [http://localhost:3000/] Button Test: warning
-[2025-06-07T09:58:09.955Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
-[2025-06-07T09:59:36.250Z] [LOG] [http://localhost:3000/] Button Test: normal log
-[2025-06-07T09:59:36.253Z] [ERROR] [http://localhost:3000/] Button Test: error
-[2025-06-07T09:59:36.257Z] [INFO] [http://localhost:3000/] Button Test: info
-[2025-06-07T09:59:36.258Z] [WARN] [http://localhost:3000/] Button Test: warning
-[2025-06-07T09:59:36.262Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
-[2025-06-07T10:24:12.762Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T10:24:12.878Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:24:14.870Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:24:15.578Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:30:44.638Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:30:45.295Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 657ms
-[2025-06-07T10:30:50.057Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 1749292250057ms
-[2025-06-07T10:37:56.378Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:37:56.311Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T10:37:58.289Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T10:37:58.957Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T11:53:26.484Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T13:17:01.778Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T13:59:23.972Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T14:08:51.335Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:08:52.221Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 887ms
-[2025-06-07T14:09:01.229Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:09:01.466Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 237ms
-[2025-06-07T14:09:28.157Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:09:28.465Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 309ms
-[2025-06-07T14:10:23.098Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:10:23.358Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 259ms
-[2025-06-07T14:10:37.277Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:10:38.092Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 814ms
-[2025-06-07T14:16:07.416Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:16:07.936Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 520ms
-[2025-06-07T14:16:31.309Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:16:32.421Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 1111ms
-[2025-06-07T14:16:56.923Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:16:57.494Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 572ms
-[2025-06-07T14:17:09.399Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:17:09.684Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 286ms
-[2025-06-07T14:17:33.716Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T14:17:34.228Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 513ms
-[2025-06-07T16:46:15.984Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T16:46:16.471Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T16:46:16.622Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 151ms
-[2025-06-07T16:46:26.093Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] rebuilding
-[2025-06-07T16:46:26.803Z] [LOG] [http://localhost:3000/logs] [Fast Refresh] done in 710ms
-[2025-06-07T16:54:53.994Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T16:54:54.362Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T16:54:54.508Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 514ms
-[2025-06-07T16:55:04.062Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749315304061ms
-[2025-06-07T17:05:25.876Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T17:05:26.496Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-07T17:05:26.500Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-07T17:05:26.526Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 650ms
-[2025-06-07T17:05:26.528Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 650ms
-[2025-06-07T17:05:26.538Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T17:05:26.552Z] [LOG] [http://localhost:3000/] Refreshing page data due to server-side change
-[2025-06-07T17:08:16.049Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-07T17:08:16.233Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-07T17:08:16.333Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 1749316096333ms
-[2025-06-07T17:08:39.225Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-07T17:08:39.810Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 585ms
-[2025-06-07T17:08:41.807Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T17:35:37.112Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-07T17:35:37.348Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-07T17:35:45.973Z] [LOG] [http://localhost:3000/logs] [HMR] connected
-[2025-06-07T17:37:22.669Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-07T17:37:40.184Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-07T17:38:31.515Z] [ERROR] [http://localhost:3000/] Button Test: error
-[2025-06-07T17:38:31.514Z] [LOG] [http://localhost:3000/] Button Test: normal log
-[2025-06-07T17:38:31.526Z] [WARN] [http://localhost:3000/] Button Test: warning
-[2025-06-07T17:38:31.523Z] [INFO] [http://localhost:3000/] Button Test: info
-[2025-06-07T17:38:31.532Z] [ERROR] [http://localhost:3000/] Unhandled Rejection: Button Test: unhandled promise rejection
-[2025-06-07T18:08:46.945Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-07T18:08:46.940Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
-[2025-06-11T13:24:59.027Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-11T13:24:59.025Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
-[2025-06-11T13:26:23.440Z] [ERROR] [http://localhost:3000/] Uncaught Error: I am a crashing component! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
-[2025-06-11T13:26:23.442Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-11T13:26:42.514Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-11T13:26:43.097Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 583ms
-[2025-06-11T13:26:56.851Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-11T13:26:56.999Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 148ms
-[2025-06-11T13:27:02.743Z] [LOG] [http://localhost:3000/] [HMR] connected
-[2025-06-11T13:27:02.800Z] [ERROR] [http://localhost:3000/] Caught error: This is a test error inside try-catch!
-[2025-06-11T13:27:06.236Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-11T13:27:06.589Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 353ms
-[2025-06-11T13:27:07.275Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-11T13:27:07.598Z] [LOG] [http://localhost:3000/] [Fast Refresh] rebuilding
-[2025-06-11T13:27:07.563Z] [LOG] [http://localhost:3000/] [Fast Refresh] done in 288ms
-[2025-06-11T13:27:08.680Z] [ERROR] [http://localhost:3000/crash] Uncaught Error: I crashed on purpose for testing! 😱 at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:642:21
-[2025-06-11T13:27:08.681Z] [LOG] [http://localhost:3000/crash] [HMR] connected
-[2025-06-11T13:27:44.839Z] [LOG] [http://localhost:3000/logs] [HMR] connected
+[2025-06-12T15:33:25.157Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [HMR] connected
+[2025-06-12T15:33:27.209Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T15:33:27.489Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 280ms
+[2025-06-12T15:33:38.117Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [HMR] connected
+[2025-06-12T15:33:43.042Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:33:43.392Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts3-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:38:25.678Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:38:26.676Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] Refreshing page data due to server-side change
+[2025-06-12T15:38:27.654Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 1976ms
+[2025-06-12T15:38:27.655Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 1976ms
+[2025-06-12T15:38:39.481Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:38:39.616Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts1-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:38:42.222Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:38:42.473Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 251ms
+[2025-06-12T15:39:22.691Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:39:23.418Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 726ms
+[2025-06-12T15:39:35.235Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:39:35.724Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 488ms
+[2025-06-12T15:39:46.264Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:39:46.783Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 519ms
+[2025-06-12T15:40:00.199Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:40:00.373Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <PathnameContextProviderAdapter router={{sdc:{},sbc:{}, ...}} isAutoExport={true}>
+      <App pageProps={{}} Component={function Dashboard} err={undefined} router={{sdc:{},sbc:{}, ...}}>
+        <ErrorBoundary FallbackComponent={function ErrorFallback} onError={function onError}>
+          <Dashboard>
+            <div style={{padding:"2rem", ...}}>
+              <h1>
+              <section>
+              <section style={{...}}>
+                <h2>
+                <div style={{display:"flex", ...}}>
+                  ...
+                    <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+                      <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+                        <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} ...>
+                          <title>
+                          <desc>
+                          <defs>
+                            <clipPath
++                             id="recharts2-clip"
+-                             id="recharts1-clip"
+                            >
+                          ...
+                      ...
+                  <div>
+                    <h4>
++                   <div
++                     id={undefined}
++                     className="recharts-responsive-container"
++                     style={{width:"100%",height:300,minWidth:0,minHeight:undefined,maxHeight:undefined}}
++                     ref={{current:null}}
++                   >
+              ...
+      ...
+ at webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/react-client-callbacks/on-recoverable-error.js:28:46
+[2025-06-12T15:40:40.813Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:40:41.437Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 625ms
+[2025-06-12T15:40:49.966Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:40:50.065Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts1-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:41:03.333Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:41:09.517Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:41:09.617Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts1-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:41:30.635Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:41:31.128Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.137Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.194Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.200Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.277Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.282Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.383Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 748ms
+[2025-06-12T15:41:31.395Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.398Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.403Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.405Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.412Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:41:31.410Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:09.559Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T15:42:10.024Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 465ms
+[2025-06-12T15:42:17.011Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:42:17.337Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts1-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:42:17.401Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.407Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.434Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.438Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.728Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.730Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.763Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:17.765Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:23.580Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:42:24.628Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.634Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.681Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.686Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.726Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.730Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:24.776Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 1196ms
+[2025-06-12T15:42:25.214Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:42:25.215Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.176Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.180Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.233Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.237Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:55.367Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:45:56.281Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.285Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:45:56.343Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 976ms
+[2025-06-12T15:46:09.192Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:46:10.047Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.052Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.100Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.105Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.153Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.158Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:10.233Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 1041ms
+[2025-06-12T15:46:41.287Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:46:41.553Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 45ms
+[2025-06-12T15:46:41.508Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:46:42.951Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:42.957Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:43.017Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:43.022Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:43.076Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:43.082Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:46:43.151Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 1643ms
+[2025-06-12T15:47:51.589Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 814ms
+[2025-06-12T15:47:50.775Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:48:06.167Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:48:06.487Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 320ms
+[2025-06-12T15:48:44.752Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:48:45.279Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] Caught by ErrorBoundary: {} {"componentStack":"\n    at Dashboard (webpack-internal:///(pages-dir-browser)/./pages/index.js:25:78)\n    at ErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/react-error-boundary/dist/react-error-boundary.development.js:20:5)\n    at App (webpack-internal:///(pages-dir-browser)/./pages/_app.js:72:11)\n    at PathnameContextProviderAdapter (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/shared/lib/router/adapters.js:81:11)\n    at PagesDevOverlayErrorBoundary (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/components/react-dev-overlay/pages/pages-dev-overlay-error-boundary.js:32:9)\n    at PagesDevOverlay (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/components/react-dev-overlay/pages/pages-dev-overlay.js:18:11)\n    at Container (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:76:1)\n    at AppContainer (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:184:11)\n    at Root (webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/index.js:413:11)"}
+[2025-06-12T15:48:45.268Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] %o
+
+%s
+
+%s
+ {} The above error occurred in the <Dashboard> component. React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
+[2025-06-12T15:48:45.287Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] ErrorBoundary Caught: ReferenceError: white is not defined
+[2025-06-12T15:48:45.292Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 540ms
+[2025-06-12T15:48:50.645Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:48:51.302Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.305Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.322Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.325Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.339Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.341Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.412Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 767ms
+[2025-06-12T15:48:51.508Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.504Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.549Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.552Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.600Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:51.603Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.460Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T15:48:57.824Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.821Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.861Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.864Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.894Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.899Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:48:57.946Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 486ms
+[2025-06-12T15:50:46.156Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T15:50:46.509Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 353ms
+[2025-06-12T15:51:13.997Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [HMR] connected
+[2025-06-12T15:51:16.242Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T15:51:16.680Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 438ms
+[2025-06-12T15:51:24.546Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:51:24.617Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <CategoricalChart width={320} height={300}>
+      <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>
+        <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">
+          <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>
+            <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>
+              <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>
+                <title>
+                <desc>
+                <defs>
+                  <clipPath
++                   id="recharts2-clip"
+-                   id="recharts1-clip"
+                  >
+                ...
+            ...
+
+[2025-06-12T15:51:24.635Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.640Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.661Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.663Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.678Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.680Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.809Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.810Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.831Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.833Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.877Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:51:24.881Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,
+       maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.398Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.379Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:  - A server/client branch `if (typeof window !== 'undefined')`. - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called. - Date formatting in a user's locale which doesn't match the server. - External changing data without sending a snapshot of it along with the HTML. - Invalid HTML tag nesting.  It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.  %s%s https://react.dev/link/hydration-mismatch     ...     <CategoricalChart width={320} height={300}>       <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>         <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">           <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>             <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>               <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>                 <title>                 <desc>                 <defs>                   <clipPath +                   id="recharts2-clip" -                   id="recharts1-clip"                   >                 ...             ... 
+[2025-06-12T15:53:15.274Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T15:53:15.401Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.416Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.418Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.430Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:15.432Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.648Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.651Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.685Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.684Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.711Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:16.712Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T15:53:19.298Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T16:00:06.036Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T16:00:06.466Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 430ms
+[2025-06-12T16:00:18.652Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [HMR] connected
+[2025-06-12T16:00:18.792Z] [ERROR] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:  - A server/client branch `if (typeof window !== 'undefined')`. - Variable input such as `Date.now()` or `Math.random()` which changes each time it's called. - Date formatting in a user's locale which doesn't match the server. - External changing data without sending a snapshot of it along with the HTML. - Invalid HTML tag nesting.  It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.  %s%s https://react.dev/link/hydration-mismatch     ...     <CategoricalChart width={320} height={300}>       <PieChart width={320} height={300} ref={null} layout="centric" stackOffset="none" barCategoryGap="10%" barGap={4} ...>         <ChartLayoutContextProvider state={{chartX:0,chartY:0, ...}} width={320} height={300} clipPathId="recharts2-...">           <div className="recharts-w..." style={{position:"...", ...}} ref={function ref}>             <Surface cx="50%" cy="50%" width={320} height={300} title={undefined} desc={undefined} ...>               <svg cx="50%" cy="50%" className="recharts-s..." width={320} height={300} style={{width:"100%", ...}} ...>                 <title>                 <desc>                 <defs>                   <clipPath +                   id="recharts2-clip" -                   id="recharts1-clip"                   >                 ...             ... 
+[2025-06-12T16:00:18.814Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:18.819Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:18.843Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:18.846Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:18.870Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:18.872Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.055Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.057Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.102Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.105Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.161Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:19.164Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:26.985Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T16:00:27.532Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.535Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(400) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.563Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.567Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(600) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.594Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.596Z] [WARN] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] The width(500) and height(300) are both fixed numbers,        maybe you don't need to use a ResponsiveContainer.
+[2025-06-12T16:00:27.627Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 642ms
+[2025-06-12T16:00:52.177Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] rebuilding
+[2025-06-12T16:00:52.702Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/] [Fast Refresh] done in 525ms
+[2025-06-12T16:01:07.375Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T16:01:07.754Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 379ms
+[2025-06-12T16:01:35.332Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] rebuilding
+[2025-06-12T16:01:35.797Z] [LOG] (f944d883-d9a4-4d21-931a-c85028667b27) [http://localhost:3000/logs] [Fast Refresh] done in 465ms
