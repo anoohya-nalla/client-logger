@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  Legend,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-} from "recharts";
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  Button,
+  Snackbar,
+  Alert,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 
-const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "#FF4C4C"];
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function Dashboard() {
   const [stats, setStats] = useState({});
@@ -25,6 +27,11 @@ export default function Dashboard() {
   const [stackedCounts, setStackedCounts] = useState([]);
   const [logsByPage, setLogsByPage] = useState([]);
   const [logs, setLogs] = useState([]);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "info",
+  });
 
   const router = useRouter();
 
@@ -60,6 +67,11 @@ export default function Dashboard() {
     console.warn("⚠️ Test: warn");
     console.error("❌ Test: error");
     Promise.reject("🚨 Unhandled rejection");
+    setSnackbar({
+      open: true,
+      message: "Test logs sent!",
+      severity: "success",
+    });
   };
 
   const triggerServerError = async () => {
@@ -67,282 +79,312 @@ export default function Dashboard() {
       const res = await fetch("/api/test-server-error");
       if (!res.ok) throw new Error("Server responded with error");
     } catch (err) {
-      console.error("Caught from client:", err.message);
+      setSnackbar({ open: true, message: err.message, severity: "error" });
     }
   };
 
-  const pieData = Object.entries(stats).map(([level, value]) => ({
-    name: level,
+  const pieData = Object.entries(stats).map(([label, value]) => ({
+    label,
     value,
   }));
-
   const lineData = Object.entries(dailyCounts)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([date, value]) => ({ date, value }));
 
   const totalLogs = Object.values(stats).reduce((a, b) => a + b, 0);
-  const totalServerLogs = stackedCounts.reduce(
-    (sum, d) => sum + (d.server || 0),
-    0
-  );
-  const percentServer = totalLogs
-    ? ((totalServerLogs / totalLogs) * 100).toFixed(1)
-    : 0;
-
   const clientLogs = logs.filter((l) => !l.url.includes("/api/"));
   const serverLogs = logs.filter((l) => l.url.includes("/api/"));
-
   const recentErrors = logs
     .filter((log) => log.level === "ERROR")
     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     .slice(0, 10);
 
+  const stripDomain = (url = "") =>
+    url.replace(/^https?:\/\/[^/]+/, "").replace(/^\//, "");
+
   return (
-    <div style={{ padding: "2rem", maxWidth: "1300px", margin: "0 auto" }}>
-      <h1 style={{ textAlign: "center" }}>📊 Log Analytics Dashboard</h1>
-
+    <Box sx={{ px: { xs: 2, md: 4 }, py: 3, width: "100%", maxWidth: "100vw" }}>
       {/* Summary Cards */}
-      <section style={sectionBox}>
-        <h2>🔢 Summary</h2>
-        <div style={cardRow}>
-          {["LOG", "INFO", "WARN", "ERROR"].map((level) => (
-            <div key={level} style={cardStyle(level)}>
-              <h3>{level}</h3>
-              <p>{stats[level] || 0}</p>
-            </div>
-          ))}
-          <div style={cardStyle("TODAY")}>
-            <h3>Today</h3>
-            <p>{todayCount}</p>
-          </div>
-          <div style={cardStyle("TOTAL")}>
-            <h3>Total</h3>
-            <p>{totalLogs}</p>
-          </div>
-        </div>
-      </section>
+      <Grid container spacing={2} sx={{ mb: 4 }} columns={12}>
+        {[
+          {
+            title: "Today’s Logs",
+            value: todayCount,
+            icon: "📅",
+            color: "#e3f2fd",
+          },
+          {
+            title: "Total Logs",
+            value: totalLogs,
+            icon: "📊",
+            color: "#ede7f6",
+          },
+          {
+            title: "Errors Logged",
+            value: stats.ERROR || 0,
+            icon: "❌",
+            color: "#ffebee",
+          },
+          {
+            title: "Warnings Logged",
+            value: stats.WARN || 0,
+            icon: "⚠️",
+            color: "#fff8e1",
+          },
+        ].map(({ title, value, icon, color }) => (
+          <Grid item xs={12} sm={6} md={3} key={title}>
+            <Card
+              sx={{
+                width: "100%",
+                bgcolor: color,
+                borderRadius: 1,
+                minWidth: "280px",
+              }}
+            >
+              <CardContent>
+                <Box display="flex" alignItems="center" gap={2}>
+                  <Box flexGrow={1}>
+                    <Typography variant="h5">{value}</Typography>
+                    <Typography variant="subtitle2" color="textSecondary">
+                      {title}
+                    </Typography>
+                  </Box>
+                  <Typography fontSize={28}>{icon}</Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
-      {/* Charts */}
-      <section style={sectionBox}>
-        <h2>📊 Visualizations</h2>
-        <div style={chartRow}>
-          {/* Pie Chart */}
-          <div>
-            <h4 style={{ textAlign: "center" }}>Log Levels</h4>
-            <PieChart width={320} height={300}>
-              <Pie
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                outerRadius={90}
-                label
-                dataKey="value"
-              >
-                {pieData.map((_, i) => (
-                  <Cell key={`cell-${i}`} fill={COLORS[i % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </div>
+      {/* Log Level Pie + Logs per Day */}
+      <Grid
+        container
+        spacing={3}
+        sx={{ mb: 4, justifyContent: "space-between" }}
+      >
+        <Grid item xs={12} md={4}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent sx={{ height: "100%" }}>
+              <ApexChart
+                type="donut"
+                height={300}
+                series={pieData.map((d) => d.value)}
+                options={{
+                  labels: pieData.map((d) => d.label),
+                  title: { text: "Log Levels" },
+                  legend: { position: "bottom" },
+                }}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent sx={{ height: "100%" }}>
+              <ApexChart
+                type="line"
+                height={300}
+                series={[{ name: "Logs", data: lineData.map((d) => d.value) }]}
+                options={{
+                  xaxis: { categories: lineData.map((d) => d.date) },
+                  title: { text: "Logs per Day" },
+                }}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Card>
+            <CardContent>
+              <ApexChart
+                type="bar"
+                series={[
+                  {
+                    name: "Client Logs",
+                    data: stackedCounts.map((d) => d.client),
+                  },
+                  {
+                    name: "Server Logs",
+                    data: stackedCounts.map((d) => d.server),
+                  },
+                ]}
+                options={{
+                  chart: { stacked: true },
+                  xaxis: { categories: stackedCounts.map((d) => d.date) },
+                  title: { text: "Client vs Server Logs" },
+                }}
+                height={300}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
 
-          {/* Line Chart */}
-          <div>
-            <h4 style={{ textAlign: "center" }}>Logs per Day</h4>
-            <ResponsiveContainer width={400} height={300}>
-              <LineChart data={lineData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#0070f3"
-                  strokeWidth={2}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </section>
+      {/* Logs by Page + Stacked Chart */}
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <ApexChart
+                type="bar"
+                series={[
+                  { name: "Count", data: logsByPage.map((d) => d.count) },
+                ]}
+                options={{
+                  plotOptions: { bar: { horizontal: true } },
+                  xaxis: {
+                    categories: logsByPage.map((d) => stripDomain(d.path)),
+                  },
+                  title: { text: "Logs by Page" },
+                }}
+                height={300}
+              />
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
 
-      {/* Extra Insights */}
-      <section style={sectionBox}>
-        <h2>📍 Breakdown</h2>
-        <div style={chartRow}>
-          {/* Logs by Page */}
-          <div>
-            <h4 style={{ textAlign: "center" }}>Logs by Page</h4>
-            <ResponsiveContainer width={600} height={300}>
-              <BarChart
-                data={logsByPage}
-                layout="vertical"
-                margin={{ left: 100 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" allowDecimals={false} />
-                <YAxis type="category" dataKey="path" width={150} />
-                <Tooltip />
-                <Bar dataKey="count" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+      {/* Heatmap */}
+      <Card sx={{ mb: 4 }}>
+        <CardContent>
+          <ApexChart
+            type="heatmap"
+            series={["INFO", "WARN", "ERROR"].map((level) => ({
+              name: level,
+              data: logsByPage.map((p) => ({
+                x: stripDomain(p.path),
+                y: logs.filter(
+                  (l) =>
+                    stripDomain(l.url).includes(stripDomain(p.path)) &&
+                    l.level === level
+                ).length,
+              })),
+            }))}
+            options={{
+              title: { text: "🔥 Heatmap: Log Level by Page" },
+              dataLabels: { enabled: true },
+              xaxis: { title: { text: "Pages" } },
+              yaxis: { title: { text: "Log Count" } },
+            }}
+            height={350}
+          />
+        </CardContent>
+      </Card>
 
-          {/* Client vs Server Stacked */}
-          <div>
-            <h4 style={{ textAlign: "center" }}>Client vs Server (Daily)</h4>
-            <ResponsiveContainer width={500} height={300}>
-              <BarChart data={stackedCounts}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="client" stackId="a" fill="#8884d8" />
-                <Bar dataKey="server" stackId="a" fill="#82ca9d" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </section>
+      {/* Client vs Server Summary */}
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="subtitle1">🧍 Client Logs</Typography>
+              <Typography>Total: {clientLogs.length}</Typography>
+              <Typography>
+                Errors: {clientLogs.filter((l) => l.level === "ERROR").length}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
 
-      {/* Client / Server Summary */}
-      <section style={sectionBox}>
-        <h2>🧍 Client & 🖥 Server Summary</h2>
-        <div style={cardRow}>
-          <div style={cardStyle("INFO")}>
-            <h3>🧍 Client Logs</h3>
-            <p>Total: {clientLogs.length}</p>
-            <p>
-              Errors: {clientLogs.filter((l) => l.level === "ERROR").length}
-            </p>
-          </div>
-          <div style={cardStyle("SERVER")}>
-            <h3>🖥 Server Logs</h3>
-            <p>Total: {serverLogs.length}</p>
-            <p>
-              Errors: {serverLogs.filter((l) => l.level === "ERROR").length}
-            </p>
-          </div>
-        </div>
-      </section>
+        <Grid item xs={12} md={6}>
+          <Card>
+            <CardContent>
+              <Typography variant="subtitle1">🖥 Server Logs</Typography>
+              <Typography>Total: {serverLogs.length}</Typography>
+              <Typography>
+                Errors: {serverLogs.filter((l) => l.level === "ERROR").length}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
 
-      {/* Action Buttons */}
-      <section style={{ marginTop: "3rem", textAlign: "center" }}>
-        <button onClick={testLogs} style={btn("#0070f3")}>
+      {/* Buttons */}
+      <Box sx={{ mt: 4, textAlign: "center" }}>
+        <Button variant="contained" sx={{ m: 1 }} onClick={testLogs}>
           🧪 Generate Logs
-        </button>
-        <button onClick={() => router.push("/crash")} style={btn("#dc3545")}>
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          sx={{ m: 1 }}
+          onClick={() => router.push("/crash")}
+        >
           💥 Trigger Client Crash
-        </button>
-        <button onClick={triggerServerError} style={btn("#ff6600")}>
+        </Button>
+        <Button
+          variant="contained"
+          color="warning"
+          sx={{ m: 1 }}
+          onClick={triggerServerError}
+        >
           🔥 Trigger Server Error
-        </button>
-        <button onClick={() => router.push("/logs")} style={btn("#28a745")}>
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          sx={{ m: 1 }}
+          onClick={() => router.push("/logs")}
+        >
           📄 View Logs
-        </button>
-      </section>
+        </Button>
+      </Box>
 
-      <section style={sectionBox}>
-        <h2>🚨 Recent Error Logs</h2>
-        <div style={{ overflowX: "auto", marginTop: "1rem" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ backgroundColor: "#f5f5f5" }}>
-                <th style={cellStyle}>Time</th>
-                <th style={cellStyle}>User ID</th>
-                <th style={cellStyle}>Message</th>
-                <th style={cellStyle}>Page</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentErrors.map((log, idx) => (
-                <tr key={idx} style={{ borderBottom: "1px solid #eee" }}>
-                  <td style={cellStyle}>
-                    {new Date(log.timestamp).toLocaleString()}
-                  </td>
-                  <td style={cellStyle}>{log.userId}</td>
-                  <td style={cellStyle}>{log.message}</td>
-                  <td style={cellStyle}>
-                    <a
-                      href={log.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{ color: "#0070f3" }}
-                    >
-                      {new URL(log.url, window.location.origin).pathname}
-                    </a>
-                  </td>
-                </tr>
-              ))}
-              {recentErrors.length === 0 && (
-                <tr>
-                  <td style={cellStyle} colSpan={3}>
-                    No recent error logs.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+      {/* Recent Errors */}
+      <Typography variant="h6" sx={{ mt: 6 }}>
+        🚨 Recent Error Logs
+      </Typography>
+      <Paper sx={{ mt: 2, overflowX: "auto" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Time</TableCell>
+              <TableCell>User ID</TableCell>
+              <TableCell>Message</TableCell>
+              <TableCell>Page</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {recentErrors.map((log, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  {new Date(log.timestamp).toLocaleString()}
+                </TableCell>
+                <TableCell>{log.userId}</TableCell>
+                <TableCell sx={{ maxWidth: 500, whiteSpace: "pre-wrap" }}>
+                  {log.message}
+                </TableCell>
+                <TableCell>
+                  <a href={log.url} target="_blank" rel="noreferrer">
+                    {stripDomain(log.url)}
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+            {recentErrors.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={4} align="center">
+                  No recent error logs.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Paper>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity={snackbar.severity}
+          onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 }
-
-// --- styles ---
-const sectionBox = { marginTop: "3rem" };
-const cardRow = {
-  display: "flex",
-  gap: "1rem",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  marginTop: "1rem",
-};
-const chartRow = {
-  display: "flex",
-  gap: "3rem",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  alignItems: "flex-start",
-};
-
-const cardStyle = (level) => ({
-  minWidth: "180px",
-  padding: "1rem",
-  borderRadius: "8px",
-  backgroundColor:
-    level === "ERROR"
-      ? "#ffe5e5"
-      : level === "WARN"
-      ? "#fff3cd"
-      : level === "INFO"
-      ? "#e7f3fe"
-      : level === "SERVER"
-      ? "#e0e0ff"
-      : "#e5ffe5",
-  color: "#333",
-  boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-  textAlign: "center",
-});
-
-const btn = (bg) => ({
-  margin: "0 0.5rem",
-  padding: "12px 20px",
-  borderRadius: "5px",
-  border: "none",
-  backgroundColor: bg,
-  color: "white",
-  fontWeight: "bold",
-  cursor: "pointer",
-});
-
-const cellStyle = {
-  padding: "8px 12px",
-  fontSize: "0.95rem",
-  textAlign: "left",
-  whiteSpace: "nowrap",
-  color: "#333",
-};

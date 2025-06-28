@@ -9,10 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
+    "@mui/x-charts": "^8.5.2",
+    "@mui/x-data-grid": "^8.5.2",
+    "apexcharts": "^4.7.0",
     "next": "15.3.3",
     "react": "^19.0.0",
+    "react-apexcharts": "^1.7.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^6.0.0",
+    "react-heatmap-grid": "^0.9.1",
     "recharts": "^2.15.3"
   },
   "devDependencies": {

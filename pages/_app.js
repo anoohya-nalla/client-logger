@@ -1,61 +1,107 @@
-import "@/styles/globals.css";
-import { interceptConsole } from "../lib/logger";
+import { useEffect, useMemo, useState } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  CssBaseline,
+  Snackbar,
+  Alert,
+  Button,
+  Box,
+  Typography,
+} from "@mui/material";
 import { ErrorBoundary } from "react-error-boundary";
+import { interceptConsole } from "../lib/logger";
+import { lightTheme, darkTheme } from "@/lib/theme";
+import MainLayout from "@/components/mainLayout";
 
-// Start intercepting console logs
 if (typeof window !== "undefined") {
   interceptConsole();
 }
 
-// Fallback UI when error happens
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
-    <div role="alert" style={{ padding: "2rem", textAlign: "center" }}>
-      <h2>Something went wrong!</h2>
-      <pre style={{ color: "red" }}>{error.message}</pre>
-      <button
+    <Box role="alert" sx={{ p: 4, textAlign: "center" }}>
+      <Typography variant="h5" color="error">
+        Something went wrong!
+      </Typography>
+      <pre style={{ color: "red", marginTop: "1rem" }}>{error.message}</pre>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
         onClick={resetErrorBoundary}
-        style={{
-          marginTop: "1rem",
-          padding: "8px 16px",
-          borderRadius: "5px",
-          border: "none",
-          backgroundColor: "#0070f3",
-          color: "white",
-          cursor: "pointer",
-        }}
       >
         Try Again
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 }
 
 export default function App({ Component, pageProps }) {
+  const [mode, setMode] = useState("light");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
+
+  const showSnackbar = (message, severity = "success") => {
+    setSnackbar({ open: true, message, severity });
+  };
+
+  const theme = useMemo(
+    () => (mode === "dark" ? darkTheme : lightTheme),
+    [mode]
+  );
+
   return (
-    <ErrorBoundary
-      FallbackComponent={ErrorFallback}
-      onError={(error, errorInfo) => {
-        console.error("Caught by ErrorBoundary:", error, errorInfo);
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity={snackbar.severity}
+          onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
 
-        if (typeof window !== "undefined") {
-          const userId = localStorage.getItem("userId") || "anonymous";
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onError={(error, errorInfo) => {
+          console.error("Caught by ErrorBoundary:", error, errorInfo);
 
-          fetch("/api/logs", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              level: "ERROR",
-              message: `ErrorBoundary Caught: ${error.toString()}`,
-              timestamp: new Date().toISOString(),
-              url: window.location.href,
-              userId,
-            }),
-          });
-        }
-      }}
-    >
-      <Component {...pageProps} />
-    </ErrorBoundary>
+          if (typeof window !== "undefined") {
+            const userId = localStorage.getItem("userId") || "anonymous";
+
+            fetch("/api/logs", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                level: "ERROR",
+                message: `ErrorBoundary Caught: ${error.toString()}`,
+                timestamp: new Date().toISOString(),
+                url: window.location.href,
+                userId,
+              }),
+            });
+          }
+        }}
+      >
+        <MainLayout mode={mode} setMode={setMode}>
+          <Component
+            {...pageProps}
+            mode={mode}
+            setMode={setMode}
+            showSnackbar={showSnackbar}
+          />
+        </MainLayout>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }

@@ -1,4 +1,24 @@
+// Note: MUI version of your logs.js has been rewritten with modern components
+// All buttons, tables, and inputs are now Material UI based
+
 import { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Pagination,
+  useTheme,
+} from "@mui/material";
 
 export default function LogsPage() {
   const [logs, setLogs] = useState([]);
@@ -7,22 +27,19 @@ export default function LogsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
 
   const logsPerPage = 10;
+  const theme = useTheme();
 
   useEffect(() => {
-    async function fetchLogs() {
+    const fetchLogs = async () => {
       const res = await fetch("/api/logs");
       const data = await res.json();
       setLogs(data.logs);
-    }
+    };
 
     fetchLogs();
-    const interval = setInterval(() => {
-      fetchLogs();
-    }, 5000);
-
+    const interval = setInterval(fetchLogs, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -33,37 +50,17 @@ export default function LogsPage() {
   };
 
   const getRowStyle = (level) => {
-    switch (level) {
-      case "ERROR":
-        return {
-          backgroundColor: darkMode ? "#440000" : "#ffe5e5",
-          color: darkMode ? "#ffcccc" : "#b30000",
-          fontWeight: "bold",
-        };
-      case "WARN":
-        return {
-          backgroundColor: darkMode ? "#443300" : "#fff9e5",
-          color: darkMode ? "#ffe680" : "#b38600",
-          fontWeight: "bold",
-        };
-      case "INFO":
-        return {
-          backgroundColor: darkMode ? "#001144" : "#e5f0ff",
-          color: darkMode ? "#80b3ff" : "#0059b3",
-          fontWeight: "bold",
-        };
-      case "LOG":
-      default:
-        return {
-          backgroundColor: darkMode ? "#003300" : "#e5ffe5",
-          color: darkMode ? "#80ff80" : "#006600",
-        };
-    }
-  };
-
-  const handleFilterChange = (level) => {
-    setFilter(level);
-    setCurrentPage(1);
+    return {
+      fontWeight: "bold",
+      backgroundColor:
+        level === "ERROR"
+          ? theme.palette.error.light
+          : level === "WARN"
+          ? theme.palette.warning.light
+          : level === "INFO"
+          ? theme.palette.info.light
+          : theme.palette.success.light,
+    };
   };
 
   const filteredLogs = logs.filter((log) => {
@@ -73,21 +70,40 @@ export default function LogsPage() {
       .includes(searchTerm.toLowerCase());
     const matchesDate =
       (!startDate || new Date(log.timestamp) >= new Date(startDate)) &&
-      (!endDate || new Date(log.timestamp) < addOneDay(new Date(endDate)));
+      (!endDate || new Date(log.timestamp) < addOneDay(endDate));
     return matchesFilter && matchesSearch && matchesDate;
   });
 
-  const indexOfLastLog = currentPage * 10;
-  const indexOfFirstLog = indexOfLastLog - 10;
-  const currentLogs = filteredLogs.slice(indexOfFirstLog, indexOfLastLog);
-  const totalPages = Math.max(Math.ceil(filteredLogs.length / 10), 1);
+  const pageCount = Math.max(Math.ceil(filteredLogs.length / logsPerPage), 1);
+  const currentLogs = filteredLogs.slice(
+    (currentPage - 1) * logsPerPage,
+    currentPage * logsPerPage
+  );
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  const handlePageChange = (_, value) => {
+    setCurrentPage(value);
   };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  const downloadCSV = () => {
+    const headers = ["Timestamp", "Level", "User ID", "URL", "Message"];
+    const rows = filteredLogs.map((log) => [
+      log.timestamp,
+      log.level,
+      log.userId,
+      log.url,
+      `"${log.message.replace(/"/g, '""')}"`,
+    ]);
+
+    let csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+
+    const link = document.createElement("a");
+    link.setAttribute("href", encodeURI(csvContent));
+    link.setAttribute("download", "filtered_logs.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const logCounts = logs.reduce((acc, log) => {
@@ -95,275 +111,108 @@ export default function LogsPage() {
     return acc;
   }, {});
 
-  const totalCount = logs.length;
-
-  const downloadCSV = () => {
-    const headers = ["Timestamp", "Level", "URL", "Message"];
-    const rows = filteredLogs.map((log) => [
-      log.timestamp,
-      log.level,
-      log.url,
-      `"${log.message.replace(/"/g, '""')}"`,
-    ]);
-
-    let csvContent =
-      "data:text/csv;charset=utf-8," +
-      [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "filtered_logs.csv"); // Notice the file name change
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const pageStyles = {
-    backgroundColor: darkMode ? "#121212" : "white",
-    color: darkMode ? "#e0e0e0" : "black",
-    minHeight: "100vh",
-    transition: "all 0.3s ease",
-  };
-
-  const topBarStyle = {
-    position: "sticky",
-    top: 0,
-    backgroundColor: darkMode ? "#121212" : "white",
-    zIndex: 999,
-    paddingBottom: "1rem",
-    marginBottom: "1rem",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    padding: "2rem",
-  };
-
   return (
-    <div style={pageStyles}>
-      <div style={topBarStyle}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <h1>Client Logs</h1>
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            style={{
-              padding: "8px 16px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-              backgroundColor: darkMode ? "#f5f5f5" : "#333",
-              color: darkMode ? "#333" : "#f5f5f5",
-              cursor: "pointer",
-              fontWeight: "bold",
-            }}
-          >
-            {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
-        </div>
-
-        {/* Search and Date Range */}
-        <div
-          style={{
-            marginTop: "1rem",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-          }}
-        >
-          <input
-            type="text"
-            placeholder="Search by message..."
+    <Box p={4}>
+      <Box mb={4}>
+        <Typography variant="h4" gutterBottom>
+          Client Logs
+        </Typography>
+        <Box display="flex" flexWrap="wrap" gap={2}>
+          <TextField
+            label="Search by message"
+            variant="outlined"
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
               setCurrentPage(1);
             }}
-            style={{
-              padding: "8px",
-              width: "300px",
-              marginRight: "20px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-            }}
           />
-          {/* 🗓️ Date Filters */}
-          <input
+          <TextField
+            label="Start Date"
             type="date"
+            InputLabelProps={{ shrink: true }}
             value={startDate}
             onChange={(e) => {
               setStartDate(e.target.value);
               setCurrentPage(1);
             }}
-            style={{
-              marginRight: "10px",
-              padding: "8px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
           />
-          to
-          <input
+          <TextField
+            label="End Date"
             type="date"
+            InputLabelProps={{ shrink: true }}
             value={endDate}
             onChange={(e) => {
               setEndDate(e.target.value);
               setCurrentPage(1);
             }}
-            style={{
-              marginLeft: "10px",
-              padding: "8px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-            }}
           />
-        </div>
-
-        {/* Filter Buttons */}
-        <div style={{ marginTop: "10px" }}>
-          {[
-            { type: "ALL", count: totalCount },
-            { type: "LOG", count: logCounts["LOG"] || 0 },
-            { type: "INFO", count: logCounts["INFO"] || 0 },
-            { type: "WARN", count: logCounts["WARN"] || 0 },
-            { type: "ERROR", count: logCounts["ERROR"] || 0 },
-          ].map(({ type, count }) => (
-            <button
-              key={type}
-              onClick={() => handleFilterChange(type)}
-              style={{
-                marginRight: "10px",
-                marginTop: "10px",
-                padding: "8px 16px",
-                borderRadius: "5px",
-                border:
-                  filter === type ? "2px solid #0070f3" : "1px solid #ccc",
-                backgroundColor: filter === type ? "#0070f3" : "#f5f5f5",
-                color: filter === type ? "white" : "black",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-            >
-              {type} ({count})
-            </button>
-          ))}
-
-          {/* Download CSV Button */}
-          <button
-            onClick={downloadCSV}
-            style={{
-              marginLeft: "20px",
-              padding: "8px 16px",
-              borderRadius: "5px",
-              border: "1px solid #ccc",
-              backgroundColor: "#28a745",
-              color: "white",
-              cursor: "pointer",
-              fontWeight: "bold",
-            }}
-          >
+          <Button variant="contained" color="success" onClick={downloadCSV}>
             📥 Download Filtered CSV
-          </button>
-        </div>
+          </Button>
+        </Box>
 
-        {/* Total logs found */}
-        <p style={{ marginTop: "10px", fontWeight: "bold" }}>
+        <Box mt={2}>
+          <ToggleButtonGroup
+            value={filter}
+            exclusive
+            onChange={(e, val) => val && setFilter(val)}
+            size="small"
+          >
+            {[
+              ["ALL", logs.length],
+              ["LOG", logCounts.LOG || 0],
+              ["INFO", logCounts.INFO || 0],
+              ["WARN", logCounts.WARN || 0],
+              ["ERROR", logCounts.ERROR || 0],
+            ].map(([type, count]) => (
+              <ToggleButton key={type} value={type}>
+                {type} ({count})
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        </Box>
+
+        <Typography mt={1} fontWeight="bold">
           Showing {filteredLogs.length} log(s)
-        </p>
-      </div>
+        </Typography>
+      </Box>
 
-      {/* Logs Table */}
-      <table
-        style={{ width: "100%", borderCollapse: "collapse", padding: "2rem" }}
-      >
-        <thead>
-          <tr>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-              Timestamp
-            </th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>Level</th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-              User ID
-            </th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>URL</th>
-            <th style={{ border: "1px solid #ddd", padding: "8px" }}>
-              Message
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentLogs.map((log, index) => (
-            <tr key={index} style={getRowStyle(log.level)}>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {new Date(log.timestamp).toLocaleString()}
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {log.level}
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {log.userId}
-              </td>
-              <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                {log.url}
-              </td>
-              <td
-                style={{
-                  border: "1px solid #ddd",
-                  padding: "8px",
-                }}
-              >
-                {log.message}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TableContainer component={Paper}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Timestamp</TableCell>
+              <TableCell>Level</TableCell>
+              <TableCell>User ID</TableCell>
+              <TableCell>URL</TableCell>
+              <TableCell>Message</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentLogs.map((log, idx) => (
+              <TableRow key={idx} sx={getRowStyle(log.level)}>
+                <TableCell>
+                  {new Date(log.timestamp).toLocaleString()}
+                </TableCell>
+                <TableCell>{log.level}</TableCell>
+                <TableCell>{log.userId}</TableCell>
+                <TableCell>{log.url}</TableCell>
+                <TableCell>{log.message}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      {/* Pagination Controls */}
-      <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "2rem",
-        }}
-      >
-        <button
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-          style={{
-            padding: "8px 16px",
-            marginRight: "10px",
-            backgroundColor: currentPage === 1 ? "#ccc" : "#0070f3",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: currentPage === 1 ? "not-allowed" : "pointer",
-          }}
-        >
-          Previous
-        </button>
-        <span style={{ margin: "0 10px", fontWeight: "bold" }}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: currentPage === totalPages ? "#ccc" : "#0070f3",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-          }}
-        >
-          Next
-        </button>
-      </div>
-    </div>
+      <Box mt={3} display="flex" justifyContent="center">
+        <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Box>
+    </Box>
   );
 }
