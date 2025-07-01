@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 
 import Dashboard from "@/pages/index";
 import LogsPage from "@/pages/logs";
+import Test from "@/pages/test";
 
 const drawerWidth = 240;
 
@@ -112,6 +113,8 @@ export default function MainLayout({ mode, setMode }) {
     switch (router.pathname) {
       case "/logs":
         return <LogsPage />;
+      case "/test":
+        return <Test />;
       case "/":
       default:
         return <Dashboard />;

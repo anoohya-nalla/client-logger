@@ -14,11 +14,19 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Container,
+  CardHeader,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { formatPathLabel } from "@/lib/formatPathLabel";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+const hasNonZeroData = (series) => {
+  if (!series || series.length === 0) return false;
+  return series.some((val) => val > 0);
+};
 
 export default function Dashboard() {
   const [stats, setStats] = useState({});
@@ -99,13 +107,35 @@ export default function Dashboard() {
     .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     .slice(0, 10);
 
-  const stripDomain = (url = "") =>
-    url.replace(/^https?:\/\/[^/]+/, "").replace(/^\//, "");
+  const clientSeries = [
+    clientLogs.filter((l) => l.level === "INFO").length,
+    clientLogs.filter((l) => l.level === "WARN").length,
+    clientLogs.filter((l) => l.level === "ERROR").length,
+  ];
+
+  const pieSeries = pieData.map((d) => d.value);
+  const lineSeries = lineData.map((d) => d.value);
+  const clientStack = stackedCounts.map((d) => d.client);
+  const serverStack = stackedCounts.map((d) => d.server);
+  const topPageCounts = logsByPage.map((d) => d.count);
+  const heatmapSeries = ["INFO", "WARN", "ERROR"].map((level) => ({
+    name: level,
+    data: logsByPage.map((p) => ({
+      x: formatPathLabel(p.path),
+      y: logs.filter(
+        (l) =>
+          formatPathLabel(l.url?.split("?")[0] || "") ===
+            formatPathLabel(p.path) && l.level === level
+      ).length,
+    })),
+  }));
+
+  const flattened = heatmapSeries.flatMap((s) => s.data.map((d) => d.y));
 
   return (
-    <Box sx={{ px: { xs: 2, md: 4 }, py: 3, width: "100%", maxWidth: "100vw" }}>
+    <Box sx={{ flexGrow: 1 }}>
       {/* Summary Cards */}
-      <Grid container spacing={2} sx={{ mb: 4 }} columns={12}>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
         {[
           {
             title: "Today’s Logs",
@@ -132,15 +162,8 @@ export default function Dashboard() {
             color: "#fff8e1",
           },
         ].map(({ title, value, icon, color }) => (
-          <Grid item xs={12} sm={6} md={3} key={title}>
-            <Card
-              sx={{
-                width: "100%",
-                bgcolor: color,
-                borderRadius: 1,
-                minWidth: "280px",
-              }}
-            >
+          <Grid item size={{ xs: 12, sm: 6, md: 3 }} key={title}>
+            <Card>
               <CardContent>
                 <Box display="flex" alignItems="center" gap={2}>
                   <Box flexGrow={1}>
@@ -158,219 +181,581 @@ export default function Dashboard() {
       </Grid>
 
       {/* Log Level Pie + Logs per Day */}
-      <Grid
-        container
-        spacing={3}
-        sx={{ mb: 4, justifyContent: "space-between" }}
-      >
-        <Grid item xs={12} md={4}>
+
+      <Grid container spacing={2} sx={{ mb: 2 }}>
+        <Grid item size={{ xs: 12, md: 4 }}>
           <Card sx={{ height: "100%" }}>
-            <CardContent sx={{ height: "100%" }}>
-              <ApexChart
-                type="donut"
-                height={300}
-                series={pieData.map((d) => d.value)}
-                options={{
-                  labels: pieData.map((d) => d.label),
-                  title: { text: "Log Levels" },
-                  legend: { position: "bottom" },
-                }}
-              />
+            <CardHeader
+              title={
+                <Typography fontSize={18}>Log Distribution by Type</Typography>
+              }
+              sx={{ paddingBottom: "0px !important" }}
+            />
+            <CardContent
+              sx={{
+                paddingTop: "10px !important",
+                paddingBottom: "0px !important",
+              }}
+            >
+              {hasNonZeroData(pieSeries) ? (
+                <ApexChart
+                  type="donut"
+                  height={180}
+                  series={pieSeries}
+                  options={{
+                    chart: {
+                      animations: { enabled: true },
+                      toolbar: { show: false },
+                      zoom: { enabled: true },
+                    },
+                    markers: {
+                      size: 6,
+                      hover: {
+                        size: 6,
+                      },
+                    },
+                    labels: pieData.map((d) => d.label),
+                    tooltip: {
+                      enabled: true, // show data on hover
+                    },
+                    grid: {
+                      show: false,
+                    },
+                    legend: {
+                      show: false,
+                    },
+                  }}
+                />
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No logs available to show distribution.
+                </Typography>
+              )}
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item size={{ xs: 12, md: 4 }}>
           <Card sx={{ height: "100%" }}>
-            <CardContent sx={{ height: "100%" }}>
-              <ApexChart
-                type="line"
-                height={300}
-                series={[{ name: "Logs", data: lineData.map((d) => d.value) }]}
-                options={{
-                  xaxis: { categories: lineData.map((d) => d.date) },
-                  title: { text: "Logs per Day" },
-                }}
-              />
+            <CardHeader
+              title={<Typography fontSize={18}>Logs Per Day</Typography>}
+              sx={{ paddingBottom: "0px !important" }}
+            />
+            <CardContent
+              sx={{
+                paddingTop: "0px !important",
+                paddingBottom: "0px !important",
+              }}
+            >
+              {hasNonZeroData(lineSeries) ? (
+                <ApexChart
+                  type="line"
+                  height={200}
+                  series={[{ name: "Logs", data: lineSeries }]}
+                  options={{
+                    chart: {
+                      animations: { enabled: true },
+                      toolbar: { show: false },
+                      zoom: { enabled: true },
+                    },
+                    markers: {
+                      size: 6,
+                      hover: {
+                        size: 6,
+                      },
+                    },
+                    xaxis: {
+                      categories: lineData.map((d) => d.date),
+                      labels: { show: false }, // hide x-axis labels
+                      axisBorder: { show: false },
+                      axisTicks: { show: false },
+                    },
+                    yaxis: {
+                      labels: { show: false }, // hide y-axis labels
+                    },
+                    tooltip: {
+                      enabled: true, // show data on hover
+                    },
+                    grid: {
+                      show: false,
+                    },
+                    legend: {
+                      show: false,
+                    },
+                  }}
+                />
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No daily logs to plot.
+                </Typography>
+              )}
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent>
-              <ApexChart
-                type="bar"
-                series={[
-                  {
-                    name: "Client Logs",
-                    data: stackedCounts.map((d) => d.client),
-                  },
-                  {
-                    name: "Server Logs",
-                    data: stackedCounts.map((d) => d.server),
-                  },
-                ]}
-                options={{
-                  chart: { stacked: true },
-                  xaxis: { categories: stackedCounts.map((d) => d.date) },
-                  title: { text: "Client vs Server Logs" },
-                }}
-                height={300}
-              />
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Card sx={{ height: "100%" }}>
+            <CardHeader
+              title={
+                <Typography fontSize={18}>Logs by Source Over Time</Typography>
+              }
+              sx={{ paddingBottom: "0px !important" }}
+            />
+            <CardContent
+              sx={{
+                paddingTop: "0px !important",
+                paddingBottom: "0px !important",
+              }}
+            >
+              {hasNonZeroData([...clientStack, ...serverStack]) ? (
+                <ApexChart
+                  type="bar"
+                  height={200}
+                  series={[
+                    {
+                      name: "Client Logs",
+                      data: clientStack,
+                    },
+                    {
+                      name: "Server Logs",
+                      data: serverStack,
+                    },
+                  ]}
+                  options={{
+                    chart: {
+                      stacked: true,
+                      animations: { enabled: true },
+                      toolbar: { show: false },
+                      zoom: { enabled: true },
+                    },
+                    markers: {
+                      size: 6,
+                      hover: {
+                        size: 6,
+                      },
+                    },
+                    xaxis: {
+                      categories: stackedCounts.map((d) => d.date),
+                      labels: { show: false }, // hide x-axis labels
+                      axisBorder: { show: false },
+                      axisTicks: { show: false },
+                    },
+                    yaxis: {
+                      labels: { show: false }, // hide y-axis labels
+                    },
+                    tooltip: {
+                      enabled: true, // show data on hover
+                    },
+                    grid: {
+                      show: false,
+                    },
+                    legend: {
+                      show: false,
+                    },
+                  }}
+                />
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No log source data to visualize.
+                </Typography>
+              )}
             </CardContent>
           </Card>
         </Grid>
       </Grid>
 
       {/* Logs by Page + Stacked Chart */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <ApexChart
-                type="bar"
-                series={[
-                  { name: "Count", data: logsByPage.map((d) => d.count) },
-                ]}
-                options={{
-                  plotOptions: { bar: { horizontal: true } },
-                  xaxis: {
-                    categories: logsByPage.map((d) => stripDomain(d.path)),
-                  },
-                  title: { text: "Logs by Page" },
-                }}
-                height={300}
-              />
-            </CardContent>
+      <Grid container spacing={2} sx={{ mb: 2 }}>
+        <Grid item size={{ md: 8 }}>
+          <Grid container spacing={2}>
+            <Grid item size={{ xs: 12, md: 6 }}>
+              <Card sx={{ height: "100%" }}>
+                <CardHeader
+                  title={
+                    <Typography fontSize={18}>
+                      Top Pages Generating Logs
+                    </Typography>
+                  }
+                  sx={{ paddingBottom: "0px !important" }}
+                />
+                <CardContent
+                  sx={{
+                    paddingTop: "0px !important",
+                    paddingBottom: "0px !important",
+                  }}
+                >
+                  {hasNonZeroData(topPageCounts) ? (
+                    <ApexChart
+                      type="bar"
+                      height={200}
+                      series={[{ name: "Count", data: topPageCounts }]}
+                      options={{
+                        plotOptions: { bar: { horizontal: true } },
+
+                        chart: {
+                          animations: { enabled: true },
+                          toolbar: { show: false },
+                          zoom: { enabled: true },
+                        },
+                        markers: {
+                          size: 6,
+                          hover: {
+                            size: 6,
+                          },
+                        },
+                        xaxis: {
+                          categories: logsByPage.map((d) =>
+                            formatPathLabel(d.path)
+                          ),
+                          labels: { show: false }, // hide x-axis labels
+                          axisBorder: { show: false },
+                          axisTicks: { show: false },
+                        },
+                        yaxis: {
+                          labels: { show: false }, // hide y-axis labels
+                        },
+                        tooltip: {
+                          enabled: true, // show data on hover
+                        },
+                        grid: {
+                          show: false,
+                        },
+                        legend: {
+                          show: false,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      No logs available to show top pages.
+                    </Typography>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item size={{ xs: 12, md: 6 }}>
+              {/* Heatmap */}
+              <Card sx={{ height: "100%" }}>
+                <CardHeader
+                  title={
+                    <Typography fontSize={18}>Log Level by Page</Typography>
+                  }
+                  sx={{ paddingBottom: "0px !important" }}
+                />
+                <CardContent
+                  sx={{
+                    paddingTop: "0px !important",
+                    paddingBottom: "0px !important",
+                  }}
+                >
+                  {hasNonZeroData(flattened) ? (
+                    <ApexChart
+                      type="heatmap"
+                      height={200}
+                      series={["INFO", "WARN", "ERROR"].map((level) => ({
+                        name: level,
+                        data: logsByPage.map((p) => ({
+                          x: formatPathLabel(p.path),
+                          y: logs.filter(
+                            (l) =>
+                              formatPathLabel(l.url?.split("?")[0] || "") ===
+                                formatPathLabel(p.path) && l.level === level
+                          ).length,
+                        })),
+                      }))}
+                      options={{
+                        chart: {
+                          animations: { enabled: true },
+                          toolbar: { show: false },
+                        },
+                        dataLabels: {
+                          enabled: true,
+                          style: { colors: ["#fff"] },
+                        },
+                        plotOptions: {
+                          heatmap: {
+                            shadeIntensity: 0.5,
+                            colorScale: {
+                              ranges: [
+                                {
+                                  from: 0,
+                                  to: 0,
+                                  color: "#ECEFF1",
+                                  name: "No Logs",
+                                },
+                                {
+                                  from: 1,
+                                  to: 10,
+                                  color: "#AED581",
+                                  name: "Low",
+                                },
+                                {
+                                  from: 11,
+                                  to: 30,
+                                  color: "#FFB74D",
+                                  name: "Medium",
+                                },
+                                {
+                                  from: 31,
+                                  to: 1000,
+                                  color: "#E57373",
+                                  name: "High",
+                                },
+                              ],
+                            },
+                          },
+                        },
+                        xaxis: {
+                          labels: { show: false },
+                        },
+                        yaxis: {
+                          labels: { show: false },
+                        },
+                        tooltip: {
+                          enabled: true,
+                        },
+                        legend: {
+                          show: true,
+                          position: "bottom",
+                        },
+                        grid: {
+                          show: false,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      Not enough log data to render heatmap.
+                    </Typography>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+          <Card sx={{ mt: 2 }}>
+            <Grid container spacing={2}>
+              {/* Client Logs Pie */}
+              <Grid item size={{ xs: 12, md: 6 }}>
+                {/* <CardHeader
+                  title={
+                    <Typography fontSize={18}>
+                      Client Logs Distribution
+                    </Typography>
+                  }
+                  sx={{ paddingBottom: "0px !important" }}
+                /> */}
+                <CardContent
+                  sx={{
+                    height: 200,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingTop: "0px !important",
+                    paddingBottom: "0px !important",
+                  }}
+                >
+                  {hasNonZeroData(clientSeries) ? (
+                    <ApexChart
+                      type="donut"
+                      height={140}
+                      series={clientSeries}
+                      options={{
+                        labels: ["INFO", "WARN", "ERROR"],
+                        legend: { position: "bottom" },
+                        tooltip: { enabled: true },
+                        chart: {
+                          animations: { enabled: true },
+                          toolbar: { show: false },
+                        },
+                        title: {
+                          text: "Client Logs",
+                          align: "center",
+                          style: {
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            color: "#333",
+                          },
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      No client logs to display.
+                    </Typography>
+                  )}
+                </CardContent>
+              </Grid>
+
+              {/* Server Logs Pie */}
+              <Grid item size={{ xs: 12, md: 6 }}>
+                {/* <CardHeader
+                  title={
+                    <Typography fontSize={18}>
+                      Server Logs Distribution
+                    </Typography>
+                  }
+                  sx={{ paddingBottom: "0px !important" }}
+                /> */}
+                <CardContent
+                  sx={{
+                    height: 200,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {hasNonZeroData([
+                    serverLogs.filter((l) => l.level === "INFO").length,
+                    serverLogs.filter((l) => l.level === "WARN").length,
+                    serverLogs.filter((l) => l.level === "ERROR").length,
+                  ]) ? (
+                    <ApexChart
+                      type="donut"
+                      height={120}
+                      series={[
+                        serverLogs.filter((l) => l.level === "INFO").length,
+                        serverLogs.filter((l) => l.level === "WARN").length,
+                        serverLogs.filter((l) => l.level === "ERROR").length,
+                      ]}
+                      options={{
+                        labels: ["INFO", "WARN", "ERROR"],
+                        legend: { position: "bottom" },
+                        tooltip: { enabled: true },
+                        chart: {
+                          animations: { enabled: true },
+                          toolbar: { show: false },
+                        },
+                        title: {
+                          text: "Server Logs",
+                          align: "center",
+                          style: {
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            color: "#333",
+                          },
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Typography variant="body2" color="text.secondary">
+                      No server logs to display.
+                    </Typography>
+                  )}
+                </CardContent>
+              </Grid>
+            </Grid>
           </Card>
         </Grid>
-      </Grid>
 
-      {/* Heatmap */}
-      <Card sx={{ mb: 4 }}>
-        <CardContent>
-          <ApexChart
-            type="heatmap"
-            series={["INFO", "WARN", "ERROR"].map((level) => ({
-              name: level,
-              data: logsByPage.map((p) => ({
-                x: stripDomain(p.path),
-                y: logs.filter(
-                  (l) =>
-                    stripDomain(l.url).includes(stripDomain(p.path)) &&
-                    l.level === level
-                ).length,
-              })),
-            }))}
-            options={{
-              title: { text: "🔥 Heatmap: Log Level by Page" },
-              dataLabels: { enabled: true },
-              xaxis: { title: { text: "Pages" } },
-              yaxis: { title: { text: "Log Count" } },
+        <Grid item size={{ xs: 12, sm: 6, md: 4 }} rowSpan={2}>
+          {/* Recent Errors */}
+          <Card
+            sx={{
+              height: "474px",
             }}
-            height={350}
-          />
-        </CardContent>
-      </Card>
+          >
+            <CardHeader
+              title={<Typography fontSize={18}>Recent Error Logs</Typography>}
+              sx={{ paddingBottom: "0px !important" }}
+              action={
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ m: 1 }}
+                  onClick={() => router.push("/logs")}
+                >
+                  View Logs
+                </Button>
+              }
+            />
+            <CardContent sx={{ p: 0, pt: 4 }}>
+              {recentErrors.length > 0 ? (
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Time</TableCell>
+                      <TableCell>Message</TableCell>
+                      <TableCell>Page</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {recentErrors.slice(0, 10).map((log, index) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          {new Date(log.timestamp).toLocaleString()}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            maxWidth: 150,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                          title={log.message}
+                        >
+                          {log.message}
+                        </TableCell>
 
-      {/* Client vs Server Summary */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="subtitle1">🧍 Client Logs</Typography>
-              <Typography>Total: {clientLogs.length}</Typography>
-              <Typography>
-                Errors: {clientLogs.filter((l) => l.level === "ERROR").length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="subtitle1">🖥 Server Logs</Typography>
-              <Typography>Total: {serverLogs.length}</Typography>
-              <Typography>
-                Errors: {serverLogs.filter((l) => l.level === "ERROR").length}
-              </Typography>
+                        <TableCell>
+                          <a
+                            href={log.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                              textDecoration: "none",
+                              color: "#1976d2",
+                            }}
+                          >
+                            {formatPathLabel(log.url)}
+                          </a>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <Box sx={{ p: 3, textAlign: "center" }}>
+                  <Typography variant="body2" color="text.secondary">
+                    No recent error logs.
+                  </Typography>
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
       </Grid>
 
       {/* Buttons */}
-      <Box sx={{ mt: 4, textAlign: "center" }}>
-        <Button variant="contained" sx={{ m: 1 }} onClick={testLogs}>
-          🧪 Generate Logs
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          sx={{ m: 1 }}
-          onClick={() => router.push("/crash")}
+      <Grid item xs={12}>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          💥 Trigger Client Crash
-        </Button>
-        <Button
-          variant="contained"
-          color="warning"
-          sx={{ m: 1 }}
-          onClick={triggerServerError}
-        >
-          🔥 Trigger Server Error
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          sx={{ m: 1 }}
-          onClick={() => router.push("/logs")}
-        >
-          📄 View Logs
-        </Button>
-      </Box>
-
-      {/* Recent Errors */}
-      <Typography variant="h6" sx={{ mt: 6 }}>
-        🚨 Recent Error Logs
-      </Typography>
-      <Paper sx={{ mt: 2, overflowX: "auto" }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Time</TableCell>
-              <TableCell>User ID</TableCell>
-              <TableCell>Message</TableCell>
-              <TableCell>Page</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {recentErrors.map((log, i) => (
-              <TableRow key={i}>
-                <TableCell>
-                  {new Date(log.timestamp).toLocaleString()}
-                </TableCell>
-                <TableCell>{log.userId}</TableCell>
-                <TableCell sx={{ maxWidth: 500, whiteSpace: "pre-wrap" }}>
-                  {log.message}
-                </TableCell>
-                <TableCell>
-                  <a href={log.url} target="_blank" rel="noreferrer">
-                    {stripDomain(log.url)}
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
-            {recentErrors.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={4} align="center">
-                  No recent error logs.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </Paper>
+          <Typography fontSize={18} sx={{ mr: 2 }}>
+            Dev Tools
+          </Typography>
+          <Button variant="contained" onClick={testLogs}>
+            Generate Logs
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => router.push("/crash")}
+          >
+            Client Crash
+          </Button>
+          <Button
+            variant="contained"
+            color="warning"
+            onClick={triggerServerError}
+          >
+            Server Error
+          </Button>
+        </CardContent>
+      </Grid>
 
       <Snackbar
         open={snackbar.open}
