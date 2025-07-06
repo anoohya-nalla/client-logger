@@ -16,10 +16,15 @@ import {
   Paper,
   Container,
   CardHeader,
+  Icon,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { formatPathLabel } from "@/lib/formatPathLabel";
+import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
+import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
+import ErrorOutlineRoundedIcon from "@mui/icons-material/ErrorOutlineRounded";
+import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -39,6 +44,7 @@ export default function Dashboard() {
     open: false,
     message: "",
     severity: "info",
+    reload: false,
   });
 
   const router = useRouter();
@@ -70,15 +76,16 @@ export default function Dashboard() {
   }, []);
 
   const testLogs = () => {
-    console.log("📄 Test: log");
-    console.info("📘 Test: info");
-    console.warn("⚠️ Test: warn");
-    console.error("❌ Test: error");
-    Promise.reject("🚨 Unhandled rejection");
+    console.log("Test: log");
+    console.info("Test: info");
+    console.warn("Test: warn");
+    console.error("Test: error");
+    Promise.reject("Unhandled rejection");
     setSnackbar({
       open: true,
       message: "Test logs sent!",
       severity: "success",
+      reload: true,
     });
   };
 
@@ -86,8 +93,19 @@ export default function Dashboard() {
     try {
       const res = await fetch("/api/test-server-error");
       if (!res.ok) throw new Error("Server responded with error");
+      setSnackbar({
+        open: true,
+        message: "Server error simulated!",
+        severity: "warning",
+        reload: true, //trigger reload after close
+      });
     } catch (err) {
-      setSnackbar({ open: true, message: err.message, severity: "error" });
+      setSnackbar({
+        open: true,
+        message: err.message,
+        severity: "error",
+        reload: true, // still reload to show latest logs
+      });
     }
   };
 
@@ -140,39 +158,72 @@ export default function Dashboard() {
           {
             title: "Today’s Logs",
             value: todayCount,
-            icon: "📅",
-            color: "#e3f2fd",
+            icon: <TodayRoundedIcon sx={{ fontSize: 24, color: "#9580ff" }} />,
           },
           {
             title: "Total Logs",
             value: totalLogs,
-            icon: "📊",
-            color: "#ede7f6",
+            icon: (
+              <BarChartRoundedIcon sx={{ fontSize: 24, color: "#9580ff" }} />
+            ),
           },
           {
             title: "Errors Logged",
             value: stats.ERROR || 0,
-            icon: "❌",
-            color: "#ffebee",
+            icon: (
+              <ErrorOutlineRoundedIcon
+                sx={{ fontSize: 24, color: "#9580ff" }}
+              />
+            ),
           },
           {
             title: "Warnings Logged",
             value: stats.WARN || 0,
-            icon: "⚠️",
-            color: "#fff8e1",
+            icon: (
+              <WarningAmberRoundedIcon
+                sx={{ fontSize: 24, color: "#9580ff" }}
+              />
+            ),
           },
         ].map(({ title, value, icon, color }) => (
           <Grid item size={{ xs: 12, sm: 6, md: 3 }} key={title}>
-            <Card>
+            <Card
+              elevation={0}
+              sx={{
+                height: "100%",
+                backgroundColor: (theme) => theme.palette[color],
+                boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+              }}
+            >
               <CardContent>
-                <Box display="flex" alignItems="center" gap={2}>
-                  <Box flexGrow={1}>
-                    <Typography variant="h5">{value}</Typography>
-                    <Typography variant="subtitle2" color="textSecondary">
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Box>
+                    <Typography variant="h6">{value}</Typography>
+                    <Typography
+                      variant="subtitle2"
+                      fontSize={12}
+                      color="text.secondary"
+                    >
                       {title}
                     </Typography>
                   </Box>
-                  <Typography fontSize={28}>{icon}</Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "40px",
+                      height: "40px",
+                      backgroundColor: "#f3f0ff",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    {icon}
+                  </Box>
                 </Box>
               </CardContent>
             </Card>
@@ -184,7 +235,13 @@ export default function Dashboard() {
 
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item size={{ xs: 12, md: 4 }}>
-          <Card sx={{ height: "100%" }}>
+          <Card
+            elevation={0}
+            sx={{
+              height: "100%",
+              boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+            }}
+          >
             <CardHeader
               title={
                 <Typography fontSize={18}>Log Distribution by Type</Typography>
@@ -203,6 +260,7 @@ export default function Dashboard() {
                   height={180}
                   series={pieSeries}
                   options={{
+                    colors: ["#e0d9ff", "#b8aaff", "#9580ff"],
                     chart: {
                       animations: { enabled: true },
                       toolbar: { show: false },
@@ -235,7 +293,13 @@ export default function Dashboard() {
           </Card>
         </Grid>
         <Grid item size={{ xs: 12, md: 4 }}>
-          <Card sx={{ height: "100%" }}>
+          <Card
+            elevation={0}
+            sx={{
+              height: "100%",
+              boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+            }}
+          >
             <CardHeader
               title={<Typography fontSize={18}>Logs Per Day</Typography>}
               sx={{ paddingBottom: "0px !important" }}
@@ -257,6 +321,7 @@ export default function Dashboard() {
                       toolbar: { show: false },
                       zoom: { enabled: true },
                     },
+                    colors: ["#9580ff"],
                     markers: {
                       size: 6,
                       hover: {
@@ -292,7 +357,13 @@ export default function Dashboard() {
           </Card>
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Card sx={{ height: "100%" }}>
+          <Card
+            elevation={0}
+            sx={{
+              height: "100%",
+              boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+            }}
+          >
             <CardHeader
               title={
                 <Typography fontSize={18}>Logs by Source Over Time</Typography>
@@ -326,6 +397,7 @@ export default function Dashboard() {
                       toolbar: { show: false },
                       zoom: { enabled: true },
                     },
+                    colors: ["#9580ff"],
                     markers: {
                       size: 6,
                       hover: {
@@ -367,7 +439,13 @@ export default function Dashboard() {
         <Grid item size={{ md: 8 }}>
           <Grid container spacing={2}>
             <Grid item size={{ xs: 12, md: 6 }}>
-              <Card sx={{ height: "100%" }}>
+              <Card
+                elevation={0}
+                sx={{
+                  height: "100%",
+                  boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+                }}
+              >
                 <CardHeader
                   title={
                     <Typography fontSize={18}>
@@ -389,7 +467,7 @@ export default function Dashboard() {
                       series={[{ name: "Count", data: topPageCounts }]}
                       options={{
                         plotOptions: { bar: { horizontal: true } },
-
+                        colors: ["#9580ff"],
                         chart: {
                           animations: { enabled: true },
                           toolbar: { show: false },
@@ -433,7 +511,13 @@ export default function Dashboard() {
             </Grid>
             <Grid item size={{ xs: 12, md: 6 }}>
               {/* Heatmap */}
-              <Card sx={{ height: "100%" }}>
+              <Card
+                elevation={0}
+                sx={{
+                  height: "100%",
+                  boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+                }}
+              >
                 <CardHeader
                   title={
                     <Typography fontSize={18}>Log Level by Page</Typography>
@@ -478,25 +562,25 @@ export default function Dashboard() {
                                 {
                                   from: 0,
                                   to: 0,
-                                  color: "#ECEFF1",
+                                  color: "#d3c8ff",
                                   name: "No Logs",
                                 },
                                 {
                                   from: 1,
                                   to: 10,
-                                  color: "#AED581",
+                                  color: "#d3c8ff",
                                   name: "Low",
                                 },
                                 {
                                   from: 11,
                                   to: 30,
-                                  color: "#FFB74D",
+                                  color: "#b5a1ff",
                                   name: "Medium",
                                 },
                                 {
                                   from: 31,
                                   to: 1000,
-                                  color: "#E57373",
+                                  color: "#9580ff",
                                   name: "High",
                                 },
                               ],
@@ -530,7 +614,13 @@ export default function Dashboard() {
               </Card>
             </Grid>
           </Grid>
-          <Card sx={{ mt: 2 }}>
+          <Card
+            elevation={0}
+            sx={{
+              mt: 2,
+              boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
+            }}
+          >
             <Grid container spacing={2}>
               {/* Client Logs Pie */}
               <Grid item size={{ xs: 12, md: 6 }}>
@@ -558,9 +648,12 @@ export default function Dashboard() {
                       height={140}
                       series={clientSeries}
                       options={{
+                        legend: {
+                          show: false,
+                        },
                         labels: ["INFO", "WARN", "ERROR"],
-                        legend: { position: "bottom" },
                         tooltip: { enabled: true },
+                        colors: ["#e0d9ff", "#b8aaff", "#9580ff"],
                         chart: {
                           animations: { enabled: true },
                           toolbar: { show: false },
@@ -609,15 +702,16 @@ export default function Dashboard() {
                   ]) ? (
                     <ApexChart
                       type="donut"
-                      height={120}
+                      height={140}
                       series={[
                         serverLogs.filter((l) => l.level === "INFO").length,
                         serverLogs.filter((l) => l.level === "WARN").length,
                         serverLogs.filter((l) => l.level === "ERROR").length,
                       ]}
                       options={{
+                        colors: ["#e0d9ff", "#b8aaff", "#9580ff"],
                         labels: ["INFO", "WARN", "ERROR"],
-                        legend: { position: "bottom" },
+                        legend: { show: false },
                         tooltip: { enabled: true },
                         chart: {
                           animations: { enabled: true },
@@ -648,27 +742,45 @@ export default function Dashboard() {
         <Grid item size={{ xs: 12, sm: 6, md: 4 }} rowSpan={2}>
           {/* Recent Errors */}
           <Card
+            elevation={0}
             sx={{
               height: "474px",
+              display: "flex",
+              flexDirection: "column",
+              boxShadow: "rgba(76, 78, 100, 0.22) 0px 2px 10px 0px",
             }}
           >
             <CardHeader
               title={<Typography fontSize={18}>Recent Error Logs</Typography>}
-              sx={{ paddingBottom: "0px !important" }}
+              sx={{ paddingBottom: "10px !important" }}
               action={
                 <Button
                   variant="contained"
-                  color="success"
-                  sx={{ m: 1 }}
+                  sx={{
+                    borderRadius: "10px",
+                    backgroundColor: "#9580ff",
+                    color: "#fff",
+                    textTransform: "none",
+                    fontWeight: 500,
+                    "&:hover": {
+                      backgroundColor: "#7a6be0",
+                    },
+                  }}
                   onClick={() => router.push("/logs")}
                 >
                   View Logs
                 </Button>
               }
             />
-            <CardContent sx={{ p: 0, pt: 4 }}>
+            <CardContent
+              sx={{
+                p: 0,
+                flexGrow: 1,
+                overflowY: "auto",
+              }}
+            >
               {recentErrors.length > 0 ? (
-                <Table size="small">
+                <Table size="small" stickyHeader>
                   <TableHead>
                     <TableRow>
                       <TableCell>Time</TableCell>
@@ -701,7 +813,7 @@ export default function Dashboard() {
                             rel="noreferrer"
                             style={{
                               textDecoration: "none",
-                              color: "#1976d2",
+                              color: "#9580ff",
                             }}
                           >
                             {formatPathLabel(log.url)}
@@ -737,19 +849,48 @@ export default function Dashboard() {
           <Typography fontSize={18} sx={{ mr: 2 }}>
             Dev Tools
           </Typography>
-          <Button variant="contained" onClick={testLogs}>
+
+          {/* Generate Logs */}
+          <Button
+            variant="contained"
+            sx={{
+              borderRadius: "8px",
+              backgroundColor: "#9580ff",
+              color: "#fff",
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#7a6be0",
+              },
+              minWidth: "126px",
+            }}
+            onClick={testLogs}
+          >
             Generate Logs
           </Button>
+
+          {/* Client Crash */}
           <Button
             variant="contained"
             color="error"
+            sx={{
+              borderRadius: "8px",
+              textTransform: "none",
+              minWidth: "126px",
+            }}
             onClick={() => router.push("/crash")}
           >
             Client Crash
           </Button>
+
+          {/* Server Error */}
           <Button
             variant="contained"
-            color="warning"
+            sx={{
+              backgroundColor: "#fdb528",
+              borderRadius: "8px",
+              textTransform: "none",
+              minWidth: "126px",
+            }}
             onClick={triggerServerError}
           >
             Server Error
@@ -760,12 +901,22 @@ export default function Dashboard() {
       <Snackbar
         open={snackbar.open}
         autoHideDuration={4000}
-        onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+        onClose={() => {
+          setSnackbar((s) => ({ ...s, open: false }));
+          if (snackbar.reload) {
+            setTimeout(() => window.location.reload(), 300); //  reload after snackbar closes
+          }
+        }}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
           severity={snackbar.severity}
-          onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+          onClose={() => {
+            setSnackbar((s) => ({ ...s, open: false }));
+            if (snackbar.reload) {
+              setTimeout(() => window.location.reload(), 300);
+            }
+          }}
         >
           {snackbar.message}
         </Alert>

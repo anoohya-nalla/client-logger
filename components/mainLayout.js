@@ -18,15 +18,17 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import DescriptionIcon from "@mui/icons-material/Description";
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 import Dashboard from "@/pages/index";
 import LogsPage from "@/pages/logs";
 import Test from "@/pages/test";
+import CrashPage from "@/pages/crash";
 
 const drawerWidth = 240;
 
@@ -84,8 +86,7 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     width: open ? drawerWidth : `calc(${theme.spacing(7)} + 1px)`,
     overflowX: "hidden",
-    backgroundColor:
-      theme.palette.custom?.appBar || theme.palette.background.paper,
+    backgroundColor: "#FFFFFF",
     color: theme.palette.text.primary,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -105,8 +106,8 @@ export default function MainLayout({ mode, setMode }) {
   const handleDrawerClose = () => setOpen(false);
 
   const navItems = [
-    { text: "Dashboard", path: "/", icon: <DashboardIcon /> },
-    { text: "Logs", path: "/logs", icon: <DescriptionIcon /> },
+    { text: "Dashboard", path: "/", icon: <DashboardRoundedIcon /> },
+    { text: "Logs", path: "/logs", icon: <AssignmentRoundedIcon /> },
   ];
 
   const renderContent = () => {
@@ -115,6 +116,8 @@ export default function MainLayout({ mode, setMode }) {
         return <LogsPage />;
       case "/test":
         return <Test />;
+      case "/crash":
+        return <CrashPage />;
       case "/":
       default:
         return <Dashboard />;
@@ -124,13 +127,12 @@ export default function MainLayout({ mode, setMode }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="fixed"
         open={open}
         elevation={0}
         sx={{
-          bgcolor:
-            theme.palette.custom?.appBar || theme.palette.background.paper,
+          bgcolor: "#f7f7fb",
           color: theme.palette.text.primary,
           borderBottom: `${
             mode === "light" ? "1px solid #e0e0e0" : "1px solid #463e4e"
@@ -157,40 +159,75 @@ export default function MainLayout({ mode, setMode }) {
             {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
 
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+        <DrawerHeader
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "20px",
+            marginTop: "14px",
+          }}
+        >
+          {/* <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
               <ChevronLeftIcon />
             )}
-          </IconButton>
+          </IconButton> */}
+          <Image src="../logo.svg" width={200} height={36} />
         </DrawerHeader>
-        <Divider />
         <List>
           {navItems.map(({ text, path, icon }) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
+                onClick={() => router.push(path)}
+                selected={router.pathname === path}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  borderRadius: "8px",
+                  marginX: 1,
+                  marginY: "4px",
+                  color: router.pathname === path ? "#fff" : "#9580ff",
+                  backgroundColor:
+                    router.pathname === path ? "#9580ff" : "transparent",
+                  "&:hover": {
+                    backgroundColor:
+                      router.pathname === path
+                        ? "#7a6be0"
+                        : "rgba(149, 128, 255, 0.1)",
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: "#9580ff",
+                    color: "#fff",
+                  },
+                  "&.Mui-selected:hover": {
+                    backgroundColor: "#7a6be0",
+                  },
                 }}
-                onClick={() => router.push(path)}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    color: router.pathname === path ? "#fff" : "inherit",
                   }}
                 >
                   {icon}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={text}
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    fontWeight: router.pathname === path ? "bold" : "normal",
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           ))}
@@ -198,7 +235,6 @@ export default function MainLayout({ mode, setMode }) {
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
         {renderContent()}
       </Box>
     </Box>

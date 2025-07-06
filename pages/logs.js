@@ -1,6 +1,3 @@
-// Note: MUI version of your logs.js has been rewritten with modern components
-// All buttons, tables, and inputs are now Material UI based
-
 import { useEffect, useState } from "react";
 import {
   Box,
@@ -17,7 +14,8 @@ import {
   TableRow,
   Paper,
   Pagination,
-  useTheme,
+  Card,
+  CardContent,
 } from "@mui/material";
 
 export default function LogsPage() {
@@ -29,7 +27,6 @@ export default function LogsPage() {
   const [endDate, setEndDate] = useState("");
 
   const logsPerPage = 10;
-  const theme = useTheme();
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -50,17 +47,34 @@ export default function LogsPage() {
   };
 
   const getRowStyle = (level) => {
-    return {
-      fontWeight: "bold",
-      backgroundColor:
-        level === "ERROR"
-          ? theme.palette.error.light
-          : level === "WARN"
-          ? theme.palette.warning.light
-          : level === "INFO"
-          ? theme.palette.info.light
-          : theme.palette.success.light,
-    };
+    switch (level) {
+      case "ERROR":
+        return {
+          backgroundColor: "#ffcccc",
+          color: "#990000",
+          fontWeight: 500,
+        };
+      case "WARN":
+        return {
+          backgroundColor: "#fff2cc",
+          color: "#996600",
+          fontWeight: 500,
+        };
+      case "INFO":
+        return {
+          backgroundColor: "#f3f0ff",
+          color: "#433558",
+          fontWeight: 500,
+        };
+      case "LOG":
+        return {
+          backgroundColor: "#f3f0ff",
+          color: "#433558",
+          fontWeight: 500,
+        };
+      default:
+        return { backgroundColor: "#f7f7fb" };
+    }
   };
 
   const filteredLogs = logs.filter((log) => {
@@ -94,7 +108,7 @@ export default function LogsPage() {
       `"${log.message.replace(/"/g, '""')}"`,
     ]);
 
-    let csvContent =
+    const csvContent =
       "data:text/csv;charset=utf-8," +
       [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
 
@@ -112,13 +126,12 @@ export default function LogsPage() {
   }, {});
 
   return (
-    <Box p={4}>
-      <Box mb={4}>
-        <Typography variant="h4" gutterBottom>
-          Client Logs
-        </Typography>
+    <Card>
+      <CardContent>
+        <Typography sx={{ mb: 1 }}>Filter</Typography>
         <Box display="flex" flexWrap="wrap" gap={2}>
           <TextField
+            size="small"
             label="Search by message"
             variant="outlined"
             value={searchTerm}
@@ -129,6 +142,7 @@ export default function LogsPage() {
           />
           <TextField
             label="Start Date"
+            size="small"
             type="date"
             InputLabelProps={{ shrink: true }}
             value={startDate}
@@ -138,6 +152,7 @@ export default function LogsPage() {
             }}
           />
           <TextField
+            size="small"
             label="End Date"
             type="date"
             InputLabelProps={{ shrink: true }}
@@ -147,8 +162,17 @@ export default function LogsPage() {
               setCurrentPage(1);
             }}
           />
-          <Button variant="contained" color="success" onClick={downloadCSV}>
-            📥 Download Filtered CSV
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#9580ff",
+              textTransform: "none",
+              fontWeight: 500,
+              "&:hover": { backgroundColor: "#7a6be0" },
+            }}
+            onClick={downloadCSV}
+          >
+            Download Filtered CSV
           </Button>
         </Box>
 
@@ -158,6 +182,20 @@ export default function LogsPage() {
             exclusive
             onChange={(e, val) => val && setFilter(val)}
             size="small"
+            sx={{
+              backgroundColor: "#f3f0ff",
+              borderRadius: "8px",
+              "& .MuiToggleButton-root": {
+                textTransform: "none",
+                fontWeight: 500,
+                color: "#433558",
+                "&.Mui-selected": {
+                  backgroundColor: "#9580ff",
+                  color: "#fff",
+                  "&:hover": { backgroundColor: "#7a6be0" },
+                },
+              },
+            }}
           >
             {[
               ["ALL", logs.length],
@@ -173,46 +211,46 @@ export default function LogsPage() {
           </ToggleButtonGroup>
         </Box>
 
-        <Typography mt={1} fontWeight="bold">
+        <Typography mt={2} mb={2} fontWeight="medium">
           Showing {filteredLogs.length} log(s)
         </Typography>
-      </Box>
 
-      <TableContainer component={Paper}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>Timestamp</TableCell>
-              <TableCell>Level</TableCell>
-              <TableCell>User ID</TableCell>
-              <TableCell>URL</TableCell>
-              <TableCell>Message</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {currentLogs.map((log, idx) => (
-              <TableRow key={idx} sx={getRowStyle(log.level)}>
-                <TableCell>
-                  {new Date(log.timestamp).toLocaleString()}
-                </TableCell>
-                <TableCell>{log.level}</TableCell>
-                <TableCell>{log.userId}</TableCell>
-                <TableCell>{log.url}</TableCell>
-                <TableCell>{log.message}</TableCell>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Timestamp</TableCell>
+                <TableCell>Level</TableCell>
+                <TableCell>User ID</TableCell>
+                <TableCell>URL</TableCell>
+                <TableCell>Message</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {currentLogs.map((log, idx) => (
+                <TableRow key={idx} sx={getRowStyle(log.level)}>
+                  <TableCell>
+                    {new Date(log.timestamp).toLocaleString()}
+                  </TableCell>
+                  <TableCell>{log.level}</TableCell>
+                  <TableCell>{log.userId}</TableCell>
+                  <TableCell>{log.url}</TableCell>
+                  <TableCell>{log.message}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-      <Box mt={3} display="flex" justifyContent="center">
-        <Pagination
-          count={pageCount}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="primary"
-        />
-      </Box>
-    </Box>
+        <Box mt={3} display="flex" justifyContent="center">
+          <Pagination
+            count={pageCount}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
+        </Box>
+      </CardContent>
+    </Card>
   );
 }

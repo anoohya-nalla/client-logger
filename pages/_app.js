@@ -12,25 +12,45 @@ import { ErrorBoundary } from "react-error-boundary";
 import { interceptConsole } from "../lib/logger";
 import { lightTheme, darkTheme } from "@/lib/theme";
 import MainLayout from "@/components/mainLayout";
+import { useRouter } from "next/router";
 
 if (typeof window !== "undefined") {
   interceptConsole();
 }
 
 function ErrorFallback({ error, resetErrorBoundary }) {
+  const router = useRouter();
+  const [goHome, setGoHome] = useState(false);
+
+  useEffect(() => {
+    if (goHome) {
+      // Reset boundary first, then route
+      resetErrorBoundary();
+      router.push("/");
+    }
+  }, [goHome, resetErrorBoundary, router]);
+
   return (
     <Box role="alert" sx={{ p: 4, textAlign: "center" }}>
       <Typography variant="h5" color="error">
         Something went wrong!
       </Typography>
       <pre style={{ color: "red", marginTop: "1rem" }}>{error.message}</pre>
+      <Button variant="text" color="primary" onClick={resetErrorBoundary}>
+        Try Again
+      </Button>
       <Button
         variant="contained"
-        color="primary"
-        sx={{ mt: 2 }}
-        onClick={resetErrorBoundary}
+        sx={{
+          ml: 2,
+          backgroundColor: "#9580ff",
+          "&:hover": {
+            backgroundColor: "#7a6be0",
+          },
+        }}
+        onClick={() => setGoHome(true)}
       >
-        Try Again
+        Go to Home
       </Button>
     </Box>
   );
