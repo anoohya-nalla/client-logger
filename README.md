@@ -1,40 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# FourEyeFour (4👁4) – Full-Stack Logging Dashboard
 
-## Getting Started
+> "When your console fails, your logs shouldn't."
 
-First, run the development server:
+FourEyeFour is a real-time full-stack **logging and error-monitoring dashboard** built with **Next.js**. It captures both **client-side and server-side logs**, displays them on an elegant dashboard, and stores them for later analysis. Inspired by real-world debugging struggles, this tool provides deep visibility into what's going wrong — even when your browser console can't help.
+
+## Features
+
+-  **Client & Server Logging**
+  - Captures all `console.log`, `console.info`, `console.warn`, `console.error`, and even **unhandled promise rejections**
+  - Logs are sent from browser to the backend via a single `/api/logs` endpoint
+  - Server-side logs (e.g. runtime errors) are automatically tracked
+
+- **Interactive Logging Dashboard**
+  - Donut chart for log type distribution
+  - Daily trend line chart
+  - Stacked bar for client vs server logs
+  - Page-level heatmap and top route logging
+  - Table of recent error logs
+
+- **Log Filtering & CSV Export**
+  - Filter logs by level (`LOG`, `INFO`, `WARN`, `ERROR`)
+  - Search logs by message
+  - Date range filtering
+  - Export current logs as filtered `.csv` file
+
+- **Crash Detection**
+  - A `/crash` page intentionally throws an error
+  - Triggers React Error Boundary
+  - Error is logged and user can click “Go Home” to recover
+
+- **Dev Tools**
+  - Built-in buttons to simulate:
+    - Client-side logs
+    - Trigger server-side errors
+    - Navigate to a crash
+
+## 📂 Tech Stack
+
+| Layer     | Stack                              |
+|----------|-------------------------------------|
+| Frontend | React + Next.js + Material UI (MUI) |
+| Backend  | Next.js API Routes (`/api/logs`)    |
+| Storage  | In-memory (can be extended to DB)   |
+| Charts   | ApexCharts                          |
+| Routing  | Next.js Dynamic Routing             |
+
+
+## Why This Project?
+
+In real-world applications, **frontend issues often go unnoticed in production**, especially if the user doesn’t report them or you can't reproduce the issue. This project was built to **centralize all logs** (even browser logs) into a single, searchable system.
+
+Instead of relying on browser consoles or remote tools, this solution:
+- Proactively catches and stores logs
+- Helps teams debug faster
+- Simulates real production issues via dev tools
+
+## Setup
 
 ```bash
+git clone https://github.com/yourusername/foureyefour.git
+cd foureyefour
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
