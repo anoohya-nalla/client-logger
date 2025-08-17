@@ -2,7 +2,7 @@
 
 > "When your console fails, your logs shouldn't."
 
-FourEyeFour is a real-time full-stack **logging and error-monitoring dashboard** built with **Next.js**. It captures both **client-side and server-side logs**, displays them on an elegant dashboard, and stores them for later analysis. Inspired by real-world debugging struggles, this tool provides deep visibility into what's going wrong — even when your browser console can't help.
+FourEyeFour is a real-time full-stack **logging and error-monitoring dashboard** built with **Next.js**. It captures both **client-side and server-side logs**, displays them on an elegant dashboard, and stores them for later analysis. Inspired by real-world debugging struggles, this tool provides deep visibility into what's going wrong - even when your browser console can't help.
 
 ## Features
 
@@ -58,7 +58,14 @@ Instead of relying on browser consoles or remote tools, this solution:
 ## Setup
 
 ```bash
-git clone https://github.com/yourusername/foureyefour.git
-cd foureyefour
+# Clone your repo
+git clone https://github.com/anoohya-nalla/client-logger.git
+
+# Move into project folder
+cd client-logger
+
+# Install dependencies
 npm install
+
+# Run locally
 npm run dev
